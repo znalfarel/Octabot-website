@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  /* Di Tailwind v4, kita link nama class ke variabel CSS */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+/* Definisikan nilai warnanya di sini (Standard CSS) */
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(270 50% 10%);
+    --primary: hsl(270 70% 55%);
+    --primary-foreground: hsl(0 0% 100%);
+    --muted: hsl(270 20% 96%);
+    --border: hsl(270 20% 90%);
+  }
+
+  .dark {
+    --background: hsl(0 0% 5%);
+    --foreground: hsl(0 0% 100%);
+    --primary: hsl(270 80% 65%);
+    --primary-foreground: hsl(0 0% 0%);
+    --muted: hsl(0 0% 10%);
+    --border: hsl(0 0% 20%);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}
