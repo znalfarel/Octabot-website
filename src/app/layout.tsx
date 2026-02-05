@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// 1. IMPORT FONT
+import { Inter, Space_Grotesk } from "next/font/google"; 
 import "./globals.css";
-import { ThemeProvider } from "@/src/components/theme-provider";
-import Navbar from "@/src/components/navbar";
-import Footer from "@/src/components/footer";
+import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+// 2. CONFIG SPACE GROTESK
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"], 
+  variable: "--font-heading",
+  weight: ["300", "400", "500", "600", "700"] 
+});
 
 export const metadata: Metadata = {
-  title: "Octabot - Jasa Sewa Bot WhatsApp Custom",
-  description: "Buat bot WhatsApp impianmu dengan fitur custom tanpa batas.",
+  title: "Octabot - Otomatisasi WhatsApp Modern",
+  description: "Jasa penyewaan bot WA custom dengan fitur lengkap.",
 };
 
 export default function RootLayout({
@@ -19,20 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow pt-16">
-              {children}
-            </main>
-            <Footer />
-          </div>
+      {/* 3. MASUKKAN VARIABLE KE BODY (PENTING!) */}
+      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <Navbar />
+          <main className="min-h-screen pt-20">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

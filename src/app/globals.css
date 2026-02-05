@@ -1,33 +1,117 @@
 @import "tailwindcss";
 
+/* --- 1. KONFIGURASI TEMA (TAILWIND V4) --- */
 @theme {
-  /* Di Tailwind v4, kita link nama class ke variabel CSS */
+  /* FONT: Menghubungkan variable dari layout.tsx ke class utility */
+  /* Ini akan membuat class 'font-heading' dan 'font-sans' bisa dipakai */
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-sans);
+
+  /* WARNA: Menghubungkan variable CSS ke class utility warna */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
   --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* RADIUS */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-/* Definisikan nilai warnanya di sini (Standard CSS) */
-@layer base {
-  :root {
-    --background: hsl(0 0% 100%);
-    --foreground: hsl(270 50% 10%);
-    --primary: hsl(270 70% 55%);
-    --primary-foreground: hsl(0 0% 100%);
-    --muted: hsl(270 20% 96%);
-    --border: hsl(270 20% 90%);
-  }
+/* --- 2. DEFINISI VARIABLE WARNA (HSL) --- */
+:root {
+  /* Mode Terang (Light Mode) */
+  --background: hsl(0 0% 100%);      /* Putih Bersih */
+  --foreground: hsl(270 50% 10%);    /* Ungu Sangat Gelap */
 
-  .dark {
-    --background: hsl(0 0% 5%);
-    --foreground: hsl(0 0% 100%);
-    --primary: hsl(270 80% 65%);
-    --primary-foreground: hsl(0 0% 0%);
-    --muted: hsl(0 0% 10%);
-    --border: hsl(0 0% 20%);
+  --card: hsl(270 20% 98%);          /* Ungu Pucat */
+  --card-foreground: hsl(270 50% 10%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(270 50% 10%);
+
+  --primary: hsl(270 85% 60%);       /* Ungu Utama Neon */
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(270 20% 96%);
+  --secondary-foreground: hsl(270 50% 10%);
+
+  --muted: hsl(270 20% 96%);
+  --muted-foreground: hsl(270 10% 40%);
+
+  --accent: hsl(270 20% 96%);
+  --accent-foreground: hsl(270 50% 10%);
+
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(270 20% 92%);        /* Border halus */
+  --input: hsl(270 20% 92%);
+  --ring: hsl(270 85% 60%);
+  
+  --radius: 1.5rem; /* Sudut membulat besar (style Dribbble) */
+}
+
+.dark {
+  /* Mode Gelap (Dark Mode - Prioritas Utama) */
+  --background: hsl(270 30% 4%);     /* Hitam Pekat dengan tint Ungu */
+  --foreground: hsl(0 0% 100%);      /* Putih Bersih */
+
+  --card: hsl(270 30% 7%);           /* Sedikit lebih terang dari background */
+  --card-foreground: hsl(0 0% 100%);
+
+  --popover: hsl(270 30% 7%);
+  --popover-foreground: hsl(0 0% 100%);
+
+  --primary: hsl(270 85% 65%);       /* Ungu Neon Terang */
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(270 30% 12%);
+  --secondary-foreground: hsl(0 0% 100%);
+
+  --muted: hsl(270 30% 12%);
+  --muted-foreground: hsl(270 10% 60%);
+
+  --accent: hsl(270 30% 12%);
+  --accent-foreground: hsl(0 0% 100%);
+
+  --destructive: hsl(0 62% 30%);
+  --destructive-foreground: hsl(0 0% 98%);
+
+  --border: hsl(270 30% 15%);        /* Border tegas di dark mode */
+  --input: hsl(270 30% 15%);
+  --ring: hsl(270 85% 65%);
+}
+
+/* --- 3. BASE STYLES --- */
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
   }
   
   html {
@@ -37,6 +121,22 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-sans), system-ui, sans-serif;
+    /* Set default font ke Sans (Inter) */
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Heading otomatis pakai font Space Grotesk jika class font-heading lupa dipasang */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), ui-sans-serif, system-ui;
+  }
+}
+
+/* --- 4. UTILITY COMPONENTS (Custom) --- */
+@layer components {
+  /* Kartu ala Dribbble */
+  .ref-card {
+    @apply bg-card border border-border rounded-lg p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5;
   }
 }
