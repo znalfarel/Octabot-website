@@ -3,17 +3,14 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, CheckCircle, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
+// IMPORT CONTEXT
 import { useLanguage } from "@/context/language-context";
 
-type Message = {
-  id: number;
-  role: "user" | "bot";
-  text: string;
-};
-
+type Message = { id: number; role: "user" | "bot"; text: string; };
 type ScenarioType = "octabot" | "petshop" | "clothing" | "digital";
 
 export default function HeroSection() {
+  // AMBIL TEXT DARI CONTEXT
   const { t, language } = useLanguage();
 
   const [activeScenario, setActiveScenario] = useState<ScenarioType>("octabot");
@@ -21,11 +18,10 @@ export default function HeroSection() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isDemoActive, setIsDemoActive] = useState(true);
-  
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // --- KONFIGURASI SKENARIO & LOGIC ---
+  // KONFIGURASI SCENARIO (DINAMIS MENGGUNAKAN 't' / Translate)
   const SCENARIOS = {
     octabot: {
       name: t.chat.scenarios.octabot.name,
@@ -33,8 +29,8 @@ export default function HeroSection() {
       icon: <Bot size={20} />,
       color: "bg-primary",
       welcome: t.chat.scenarios.octabot.welcome,
+      // Logic jawaban bot
       logic: (text: string) => {
-        // Regex cek keyword (Indo/Eng/General)
         if (text.match(/harga|biaya|price|cost|pay|bayar/i)) return t.chat.scenarios.octabot.answers.price;
         if (text.match(/broadcast|sebar|blast/i)) return t.chat.scenarios.octabot.answers.broadcast;
         if (text.match(/fitur|bisa|feature|what can/i)) return t.chat.scenarios.octabot.answers.features;
@@ -81,8 +77,9 @@ export default function HeroSection() {
 
   const currentData = SCENARIOS[activeScenario];
 
-  // --- EFEK: RESET DEMO SAAT GANTI TOKO ATAU BAHASA ---
+  // --- EFEK: RESET & JALANKAN DEMO BARU SAAT BAHASA/SKENARIO BERUBAH ---
   useEffect(() => {
+    // 1. Reset State
     setIsDemoActive(true);
     setMessages([]);
     setInputValue("");
@@ -90,36 +87,48 @@ export default function HeroSection() {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
 
-    // Tampilkan pesan selamat datang dari Context
+    // 2. Tentukan Pertanyaan Dummy User (Agar terlihat hidup)
+    let dummyQuestion = "";
+    if (activeScenario === 'octabot') dummyQuestion = "Info Broadcast";
+    else if (activeScenario === 'petshop') dummyQuestion = "Royal Canin?";
+    else if (activeScenario === 'clothing') dummyQuestion = "Size XL?";
+    else dummyQuestion = "Netflix?";
+
+    // 3. Susun Skenario Percakapan Lengkap (Welcome -> Tanya -> Jawab -> Closing)
     const demoScript = [
-      { role: "bot", text: currentData.welcome, delay: 1000 },
+      { role: "bot", text: currentData.welcome, delay: 800 },
+      { role: "user", text: dummyQuestion, delay: 2500 },
+      // @ts-ignore
+      { role: "bot", text: currentData.logic ? currentData.logic(dummyQuestion) : "Auto Reply...", delay: 4500 },
+      { role: "bot", text: language === 'id' ? "Silakan coba chat saya! 👇" : "Try chatting with me! 👇", delay: 6500 }
     ];
 
-    let cummulativeDelay = 0;
+    // 4. Jalankan Loop Animasi
     demoScript.forEach((msg, index) => {
-      // @ts-ignore
-      const t1 = setTimeout(() => setIsTyping(true), cummulativeDelay + 500);
-      timeoutsRef.current.push(t1);
+      // Logic Ngetik (Hanya untuk Bot)
+      if (msg.role === "bot") {
+        const typingStart = msg.delay - 800;
+        const t1 = setTimeout(() => setIsTyping(true), typingStart > 0 ? typingStart : 0);
+        timeoutsRef.current.push(t1);
+      }
 
-      cummulativeDelay += msg.delay; // Menggunakan delay dari script
+      // Logic Muncul Pesan
       const t2 = setTimeout(() => {
         setIsTyping(false);
-        setMessages((prev) => [...prev, { id: index, role: "bot", text: msg.text }]);
-      }, cummulativeDelay);
+        setMessages((prev) => [...prev, { id: index, role: msg.role as "user" | "bot", text: msg.text }]);
+      }, msg.delay);
       timeoutsRef.current.push(t2);
     });
 
     return () => timeoutsRef.current.forEach(clearTimeout);
-  }, [activeScenario, language]); 
+  }, [activeScenario, language]); // Trigger saat bahasa/skenario berubah
 
   // Auto Scroll
   useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
+    if (chatContainerRef.current) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   }, [messages, isTyping]);
 
-  // --- HANDLER KIRIM PESAN ---
+  // Handler Kirim Pesan Manual
   const handleSendMessage = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!inputValue.trim()) return;
@@ -130,18 +139,16 @@ export default function HeroSection() {
       setMessages([]);
       setIsTyping(false);
     }
-
     const text = inputValue;
     setInputValue("");
 
     setTimeout(() => {
-      // 1. Pesan User
       setMessages((prev) => [...prev, { id: Date.now(), role: "user", text }]);
       setIsTyping(true);
-
       setTimeout(() => {
-        // 2. Pesan Bot (PAKAI LOGIC PINTAR LAGI)
-        const reply = currentData.logic(text);
+        // Panggil Logic Pintar
+        // @ts-ignore
+        const reply = currentData.logic ? currentData.logic(text) : "Bot Reply: " + text;
         setMessages((prev) => [...prev, { id: Date.now() + 1, role: "bot", text: reply }]);
         setIsTyping(false);
       }, 1000 + Math.random() * 1000);
@@ -151,7 +158,7 @@ export default function HeroSection() {
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center gap-10 lg:gap-20 overflow-hidden">
       
-      {/* --- KIRI: TEXT HERO --- */}
+      {/* TEXT HERO (TERJEMAHAN) */}
       <div className="flex-1 space-y-8 text-center lg:text-left w-full z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
           <span className="relative flex h-2 w-2 mr-1">
@@ -185,24 +192,14 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* --- KANAN: CHAT UI + SIDEBAR RESPONSIVE --- */}
+      {/* CHAT UI */}
       <div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col md:flex-row gap-4 items-center md:items-end relative group">
-        
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div>
 
         {/* SIDEBAR */}
         <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
           {Object.entries(SCENARIOS).map(([key, data]) => (
-            <button
-              key={key}
-              onClick={() => setActiveScenario(key as ScenarioType)}
-              className={`relative group/btn p-3 rounded-full transition-all duration-300 ${
-                activeScenario === key 
-                  ? `${data.color} text-white shadow-lg scale-110` 
-                  : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"
-              }`}
-              title={data.name}
-            >
+            <button key={key} onClick={() => setActiveScenario(key as ScenarioType)} className={`relative group/btn p-3 rounded-full transition-all duration-300 ${activeScenario === key ? `${data.color} text-white shadow-lg scale-110` : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"}`} title={data.name}>
               {data.icon}
               <span className="absolute z-50 whitespace-nowrap bg-foreground text-background text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none left-1/2 -translate-x-1/2 top-full mt-2 md:top-1/2 md:-translate-y-1/2 md:mt-0 md:left-auto md:translate-x-0 md:right-full md:mr-3">
                 {data.name}
@@ -211,9 +208,8 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* CHAT INTERFACE */}
+        {/* HP CHAT */}
         <div className="w-full max-w-md md:w-[400px] aspect-[4/5] bg-card/90 backdrop-blur-xl border border-border rounded-[2.5rem] p-4 sm:p-6 relative shadow-2xl flex flex-col transition-transform duration-500 order-1 md:order-2">
-           
            <div className="flex justify-between items-center mb-4 pb-4 border-b border-border/50">
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center text-white ring-2 ring-background transition-colors duration-500`}>
@@ -237,11 +233,7 @@ export default function HeroSection() {
            <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-border hover:scrollbar-thumb-primary/50">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                  <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${
-                    msg.role === 'user' 
-                      ? 'bg-muted/50 border border-border text-foreground rounded-br-none' 
-                      : `${currentData.color} text-white rounded-bl-none shadow-md`
-                  }`}>
+                  <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} text-white rounded-bl-none shadow-md`}`}>
                     {msg.text}
                   </div>
                 </div>
@@ -271,7 +263,6 @@ export default function HeroSection() {
                 </button>
               </div>
            </form>
-
         </div>
       </div>
     </section>
