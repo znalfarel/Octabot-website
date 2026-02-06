@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-// 1. IMPORT FONT
 import { Inter, Space_Grotesk } from "next/font/google"; 
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+// 1. IMPORT PROVIDER
+import { LanguageProvider } from "@/context/language-context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-
-// 2. CONFIG SPACE GROTESK
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"], 
   variable: "--font-heading",
@@ -18,6 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Octabot - Otomatisasi WhatsApp Modern",
   description: "Jasa penyewaan bot WA custom dengan fitur lengkap.",
+  icons: { icon: "/icon.png" },
 };
 
 export default function RootLayout({
@@ -27,15 +27,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      {/* 3. MASUKKAN VARIABLE KE BODY (PENTING!) */}
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Navbar />
-          <main className="min-h-screen pt-20">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        {/* 2. BUNGKUS DENGAN PROVIDER */}
+        <LanguageProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            <Navbar />
+            <main className="min-h-screen pt-20">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
