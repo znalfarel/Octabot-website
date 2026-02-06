@@ -39,7 +39,7 @@ export default function HeroSection() {
     },
     petshop: {
       name: t.chat.scenarios.petshop.name,
-      botName: "Meow Petshop 🐱",
+      botName: "Meow Petshop",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
       welcome: t.chat.scenarios.petshop.welcome,
@@ -51,7 +51,7 @@ export default function HeroSection() {
     },
     clothing: {
       name: t.chat.scenarios.clothing.name,
-      botName: "Fashion Store 👗",
+      botName: "Fashion Store",
       icon: <Shirt size={20} />,
       color: "bg-pink-500",
       welcome: t.chat.scenarios.clothing.welcome,
@@ -63,7 +63,7 @@ export default function HeroSection() {
     },
     digital: {
       name: t.chat.scenarios.digital.name,
-      botName: "Premium Apps 📱",
+      botName: "Premium Apps",
       icon: <Smartphone size={20} />,
       color: "bg-blue-500",
       welcome: t.chat.scenarios.digital.welcome,

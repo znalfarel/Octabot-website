@@ -11,7 +11,8 @@ export const DICTIONARY = {
       badge: "Bot WhatsApp #1 Paling Fleksibel",
       titleStart: "Otomatisasi",
       titleEnd: "Bisnis.",
-      desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis di samping kanan! 👉",
+      // REVISI: Kata-kata lebih netral (tidak menunjuk arah kanan)
+      desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis secara interaktif!",
       btnPrimary: "Buat Bot",
       features: ["Setup Cepat", "Data Aman"],
       inputPlaceholder: "Ketik pesan...",
@@ -57,7 +58,8 @@ export const DICTIONARY = {
     navbar: { items: ["Features", "Pricing", "Contact"], cta: "Start Now", choose: "Select Language" },
     hero: {
       badge: "#1 Most Flexible WhatsApp Bot", titleStart: "Automate Your", titleEnd: "Business.",
-      desc: "Rent custom WhatsApp bots for Online Stores, Clinics, or Services. Try simulating various businesses on the right! 👉",
+      // REVISI: Removed "on the right"
+      desc: "Rent custom WhatsApp bots for Online Stores, Clinics, or Services. Try simulating various businesses interactively!",
       btnPrimary: "Create Bot", features: ["Fast Setup", "Secure Data"], inputPlaceholder: "Type a message...", demo: "Demo Mode"
     },
     chat: {
@@ -94,7 +96,8 @@ export const DICTIONARY = {
     navbar: { items: ["Características", "Precios", "Contacto"], cta: "Empezar", choose: "Seleccionar Idioma" },
     hero: {
       badge: "Bot de WhatsApp #1 Más Flexible", titleStart: "Automatiza tu", titleEnd: "Negocio.",
-      desc: "Alquila bots de WhatsApp personalizados. ¡Prueba simulaciones a la derecha! 👉",
+      // REVISI: Removed "a la derecha"
+      desc: "Alquila bots de WhatsApp personalizados para Tiendas Online o Clínicas. ¡Prueba simulaciones interactivas ahora!",
       btnPrimary: "Crear Bot", features: ["Rápido", "Seguro"], inputPlaceholder: "Escribe un mensaje...", demo: "Modo Demo"
     },
     chat: {
@@ -131,7 +134,8 @@ export const DICTIONARY = {
     navbar: { items: ["機能", "料金", "お問い合わせ"], cta: "開始", choose: "言語を選択" },
     hero: {
       badge: "No.1 WhatsAppボット", titleStart: "ビジネスを", titleEnd: "自動化。",
-      desc: "カスタムWhatsAppボットをレンタル。右側でシミュレーションを試してください！👉",
+      // REVISI: Removed "on the right side" context
+      desc: "カスタムWhatsAppボットをレンタル。インタラクティブなシミュレーションを今すぐ体験！",
       btnPrimary: "ボット作成", features: ["高速", "安全"], inputPlaceholder: "メッセージ...", demo: "デモ"
     },
     chat: {
