@@ -58,7 +58,7 @@ export default function Navbar() {
                   <Image src={currentTheme === 'dark' ? "/logo-dark.svg" : "/logo-light.svg"} alt="Logo Octabot" fill className="object-contain" priority />
                 )}
               </div>
-              <span className="font-heading font-bold text-xl tracking-normal">Octabot</span>
+              <span className="font-heading font-bold text-2xl tracking-normal">Octabot</span>
             </Link>
 
             {/* DESKTOP MENU */}

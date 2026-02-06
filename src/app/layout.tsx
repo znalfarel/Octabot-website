@@ -4,10 +4,12 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-// 1. IMPORT PROVIDER
+// 1. IMPORT LANGUAGE PROVIDER (Untuk fitur ganti bahasa)
 import { LanguageProvider } from "@/context/language-context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+// Konfigurasi Font Judul (Futuristik)
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"], 
   variable: "--font-heading",
@@ -17,7 +19,14 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Octabot - Otomatisasi WhatsApp Modern",
   description: "Jasa penyewaan bot WA custom dengan fitur lengkap.",
-  icons: { icon: "/icon.png" },
+  
+  // --- PERBAIKAN LOGO TAB BROWSER (FAVICON) ---
+  // Pastikan Anda memiliki file 'logo.png' (atau 'icon.png') di dalam folder 'public'
+  icons: {
+    icon: "/icon.svg", // Ganti dengan "/icon.png" jika nama file Anda icon.png
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -28,8 +37,11 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}>
-        {/* 2. BUNGKUS DENGAN PROVIDER */}
+        
+        {/* 2. BUNGKUS DENGAN LANGUAGE PROVIDER */}
         <LanguageProvider>
+          
+          {/* 3. BUNGKUS DENGAN THEME PROVIDER */}
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             <Navbar />
             <main className="min-h-screen pt-20">
@@ -37,7 +49,9 @@ export default function RootLayout({
             </main>
             <Footer />
           </ThemeProvider>
+          
         </LanguageProvider>
+        
       </body>
     </html>
   );

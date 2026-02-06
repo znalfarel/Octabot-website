@@ -1,52 +1,75 @@
+"use client";
+
 import Link from "next/link";
-import { MessageSquareMore, Instagram, Twitter, Linkedin } from "lucide-react";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { useLanguage } from "@/context/language-context";
 
 export default function Footer() {
+  const { t, language } = useLanguage(); // Ambil bahasa aktif
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+
+  // Render logo dinamis
+  const logoSrc = mounted && currentTheme === 'light' ? "/logo-light.svg" : "/logo-dark.svg";
+
   return (
-    <footer className="bg-card border-t border-border pt-20 pb-10 mt-20">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-4 md:col-span-2">
+    <footer className="bg-background border-t border-border py-12 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          
+          {/* Brand Column */}
+          <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
-                <MessageSquareMore size={18} />
-              </div>
-              <span className="font-bold text-xl">Octabot</span>
+               {mounted && <Image src={logoSrc} alt="Octabot" width={32} height={32} className="object-contain" />}
+               <span className="font-heading font-bold text-2xl">Octabot</span>
             </div>
-            <p className="text-muted-foreground pr-4 max-w-md">
-              Platform otomasi WhatsApp paling fleksibel. Bangun bot canggih untuk layanan pelanggan, notifikasi, dan penjualan tanpa batas.
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {t.footer.desc}
             </p>
           </div>
 
+          {/* Product Column */}
           <div>
-            <h3 className="font-bold mb-6">Produk</h3>
-            <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary transition-colors">Fitur Utama</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Integrasi API</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Harga Paket</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Studi Kasus</Link></li>
+            <h4 className="font-bold mb-4">{t.footer.product}</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="#fitur" className="hover:text-primary transition-colors">{t.footer.links.features}</Link></li>
+              <li><Link href="#harga" className="hover:text-primary transition-colors">{t.footer.links.pricing}</Link></li>
+              <li><Link href="/api" className="hover:text-primary transition-colors">{t.footer.links.api}</Link></li>
             </ul>
           </div>
 
+          {/* Company Column */}
           <div>
-            <h3 className="font-bold mb-6">Perusahaan</h3>
-            <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary transition-colors">Tentang Kami</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Kebijakan Privasi</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Syarat & Ketentuan</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Hubungi Kami</Link></li>
+            <h4 className="font-bold mb-4">{t.footer.company}</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/about" className="hover:text-primary transition-colors">{t.footer.links.about}</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">{t.footer.links.contact}</Link></li>
+            </ul>
+          </div>
+
+          {/* Legal Column */}
+          <div>
+            <h4 className="font-bold mb-4">{t.footer.legal}</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/privacy" className="hover:text-primary transition-colors">{t.footer.links.privacy}</Link></li>
+              <li><Link href="/terms" className="hover:text-primary transition-colors">{t.footer.links.terms}</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Octabot. All rights reserved.
-          </p>
+        {/* Copyright */}
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+          <p>{t.footer.copyright}</p>
           <div className="flex gap-4">
-            <a href="#" className="text-muted-foreground hover:text-primary p-2 bg-background rounded-full border border-border transition-all hover:scale-110"><Instagram size={18} /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary p-2 bg-background rounded-full border border-border transition-all hover:scale-110"><Twitter size={18} /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary p-2 bg-background rounded-full border border-border transition-all hover:scale-110"><Linkedin size={18} /></a>
+            {/* Opsional: Social Icons bisa ditaruh sini */}
+            <span>Instagram</span>
+            <span>Twitter</span>
+            <span>LinkedIn</span>
           </div>
         </div>
       </div>
