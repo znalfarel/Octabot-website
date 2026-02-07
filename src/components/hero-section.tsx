@@ -39,7 +39,7 @@ export default function HeroSection() {
     },
     petshop: {
       name: t.chat.scenarios.petshop.name,
-      botName: "Meow Petshop 🐱",
+      botName: "Meow Petshop",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
       welcome: t.chat.scenarios.petshop.welcome,
