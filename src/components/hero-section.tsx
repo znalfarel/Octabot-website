@@ -39,7 +39,7 @@ export default function HeroSection() {
     },
     petshop: {
       name: t.chat.scenarios.petshop.name,
-      botName: "Meow Petshop",
+      botName: "Meow Petshop 🐱",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
       welcome: t.chat.scenarios.petshop.welcome,
@@ -228,11 +228,7 @@ export default function HeroSection() {
           </Link>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 justify-center lg:justify-start text-sm text-muted-foreground">
-            {t.hero.features.map((feat, i) => (
-               <div key={i} className="flex items-center gap-2"><CheckCircle size={16} className="text-primary"/> {feat}</div>
-            ))}
-        </div>
+        
       </div>
 
       {/* CHAT UI */}

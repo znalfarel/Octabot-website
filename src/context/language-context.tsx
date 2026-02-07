@@ -8,13 +8,13 @@ export const DICTIONARY = {
   id: {
     navbar: { items: ["Fitur", "Harga", "Kontak"], cta: "Mulai Sekarang", choose: "Pilih Bahasa" },
     hero: {
-      badge: "Bot WhatsApp #1 Paling Fleksibel",
+      badge: "Beta Version",
       titleStart: "Otomatisasi",
       titleEnd: "Bisnis.",
-      // REVISI: Kata-kata lebih netral (tidak menunjuk arah kanan)
+      // REVISI: Deskripsi Netral (Tanpa menunjuk kanan/bawah)
       desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis secara interaktif!",
       btnPrimary: "Buat Bot",
-      features: ["Setup Cepat", "Data Aman"],
+      
       inputPlaceholder: "Ketik pesan...",
       demo: "Demo Mode"
     },
@@ -30,7 +30,6 @@ export const DICTIONARY = {
         digital: { name: "Produk Digital", welcome: "Halo Gan! 🚀 Cari aplikasi premium?", answers: { netflix: "Netflix & Spotify ready garansi full.", warranty: "Akun bermasalah kita ganti baru.", default: "Ready: Netflix, Spotify. Mau yang mana?" } }
       }
     },
-    // --- NEW SECTIONS ---
     features: {
       title: "Fitur Unggulan",
       subtitle: "Semua yang Anda butuhkan untuk mengelola chat pelanggan.",
@@ -40,6 +39,28 @@ export const DICTIONARY = {
         { title: "Integrasi API", desc: "Hubungkan bot dengan database stok atau CRM Anda dengan mudah." }
       ]
     },
+    // --- BAGIAN BARU: COMPARISON SECTION ---
+    comparison: {
+      title: "Mengapa Octabot Lebih Unggul?",
+      subtitle: "Tinggalkan chatbot kaku. Beralihlah ke AI yang mengerti pelanggan.",
+      traditional: {
+        title: "Chatbot Tradisional",
+        points: [
+          { title: "Kaku & Robotik", desc: "Respon terasa template dan tidak memiliki empati." },
+          { title: "Gagal Paham Konteks", desc: "Sering error jika pelanggan mengetik typo atau bahasa gaul." },
+          { title: "Hanya Menjawab", desc: "Terbatas memberikan info, tidak bisa membantu transaksi." }
+        ]
+      },
+      octabot: {
+        title: "Octabot AI Agent",
+        points: [
+          { title: "Percakapan Natural", desc: "Bisa ngobrol santai, sopan, dan persuasif layaknya manusia." },
+          { title: "Cerdas & Adaptif", desc: "Mengerti bahasa daerah, singkatan, dan konteks yang rumit." },
+          { title: "Bisa Eksekusi", desc: "Membantu closing penjualan, booking jadwal, hingga input data." }
+        ]
+      }
+    },
+    // ---------------------------------------
     cta: {
       title: "Siap Meningkatkan Bisnis Anda?",
       desc: "Bergabunglah dengan 500+ bisnis yang telah beralih ke otomatisasi.",
@@ -58,7 +79,6 @@ export const DICTIONARY = {
     navbar: { items: ["Features", "Pricing", "Contact"], cta: "Start Now", choose: "Select Language" },
     hero: {
       badge: "#1 Most Flexible WhatsApp Bot", titleStart: "Automate Your", titleEnd: "Business.",
-      // REVISI: Removed "on the right"
       desc: "Rent custom WhatsApp bots for Online Stores, Clinics, or Services. Try simulating various businesses interactively!",
       btnPrimary: "Create Bot", features: ["Fast Setup", "Secure Data"], inputPlaceholder: "Type a message...", demo: "Demo Mode"
     },
@@ -80,6 +100,26 @@ export const DICTIONARY = {
         { title: "API Integration", desc: "Connect the bot with your inventory database or CRM easily." }
       ]
     },
+    comparison: {
+      title: "Why Octabot is Superior?",
+      subtitle: "Leave rigid chatbots behind. Switch to AI that understands customers.",
+      traditional: {
+        title: "Traditional Chatbot",
+        points: [
+          { title: "Rigid & Robotic", desc: "Responses feel templated and lack empathy." },
+          { title: "Lacks Context", desc: "Often errors if customers use typos or slang." },
+          { title: "Just Answering", desc: "Limited to giving info, cannot assist in transactions." }
+        ]
+      },
+      octabot: {
+        title: "Octabot AI Agent",
+        points: [
+          { title: "Natural Conversation", desc: "Chats casually, politely, and persuasively like a human." },
+          { title: "Smart & Adaptive", desc: "Understands local slang, abbreviations, and complex contexts." },
+          { title: "Action Oriented", desc: "Helps close sales, book appointments, and input data." }
+        ]
+      }
+    },
     cta: {
       title: "Ready to Scale Your Business?",
       desc: "Join 500+ businesses that have switched to automation.",
@@ -96,7 +136,6 @@ export const DICTIONARY = {
     navbar: { items: ["Características", "Precios", "Contacto"], cta: "Empezar", choose: "Seleccionar Idioma" },
     hero: {
       badge: "Bot de WhatsApp #1 Más Flexible", titleStart: "Automatiza tu", titleEnd: "Negocio.",
-      // REVISI: Removed "a la derecha"
       desc: "Alquila bots de WhatsApp personalizados para Tiendas Online o Clínicas. ¡Prueba simulaciones interactivas ahora!",
       btnPrimary: "Crear Bot", features: ["Rápido", "Seguro"], inputPlaceholder: "Escribe un mensaje...", demo: "Modo Demo"
     },
@@ -118,6 +157,26 @@ export const DICTIONARY = {
         { title: "Integración API", desc: "Conecta el bot con tu base de datos o CRM fácilmente." }
       ]
     },
+    comparison: {
+      title: "¿Por qué Octabot es Superior?",
+      subtitle: "Deja atrás los chatbots rígidos. Cámbiate a la IA.",
+      traditional: {
+        title: "Chatbot Tradicional",
+        points: [
+          { title: "Rígido y Robótico", desc: "Las respuestas parecen plantillas y carecen de empatía." },
+          { title: "Falta de Contexto", desc: "A menudo falla si los clientes usan jerga." },
+          { title: "Solo Responde", desc: "Limitado a dar información, no puede ayudar en transacciones." }
+        ]
+      },
+      octabot: {
+        title: "Agente Octabot AI",
+        points: [
+          { title: "Conversación Natural", desc: "Charla casual y persuasiva como un humano." },
+          { title: "Inteligente", desc: "Entiende jerga local y contextos complejos." },
+          { title: "Orientado a la Acción", desc: "Ayuda a cerrar ventas y reservar citas." }
+        ]
+      }
+    },
     cta: {
       title: "¿Listo para Crecer?",
       desc: "Únete a más de 500 empresas que usan automatización.",
@@ -134,7 +193,6 @@ export const DICTIONARY = {
     navbar: { items: ["機能", "料金", "お問い合わせ"], cta: "開始", choose: "言語を選択" },
     hero: {
       badge: "No.1 WhatsAppボット", titleStart: "ビジネスを", titleEnd: "自動化。",
-      // REVISI: Removed "on the right side" context
       desc: "カスタムWhatsAppボットをレンタル。インタラクティブなシミュレーションを今すぐ体験！",
       btnPrimary: "ボット作成", features: ["高速", "安全"], inputPlaceholder: "メッセージ...", demo: "デモ"
     },
@@ -155,6 +213,26 @@ export const DICTIONARY = {
         { title: "BAN対策一斉送信", desc: "スマートな遅延機能で安全にメッセージを送信。" },
         { title: "API連携", desc: "在庫データベースやCRMと簡単に接続。" }
       ]
+    },
+    comparison: {
+      title: "なぜOctabotが優れているのか？",
+      subtitle: "硬直したチャットボットは過去のもの。顧客を理解するAIへ。",
+      traditional: {
+        title: "従来のチャットボット",
+        points: [
+          { title: "硬直的でロボットのよう", desc: "定型文のような返答で、共感に欠けます。" },
+          { title: "文脈を理解できない", desc: "誤字や俗語があるとエラーになりがちです。" },
+          { title: "回答のみ", desc: "情報提供に限られ、取引を支援できません。" }
+        ]
+      },
+      octabot: {
+        title: "Octabot AIエージェント",
+        points: [
+          { title: "自然な会話", desc: "人間のようにカジュアルで礼儀正しく会話します。" },
+          { title: "スマートで適応力がある", desc: "地域の方言や複雑な文脈を理解します。" },
+          { title: "実行可能", desc: "販売のクロージングや予約をサポートします。" }
+        ]
+      }
     },
     cta: {
       title: "ビジネスを拡大しませんか？",
