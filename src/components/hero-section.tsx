@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image"; // Pastikan Image diimport
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, CheckCircle, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
 // IMPORT CONTEXT
@@ -29,7 +30,6 @@ export default function HeroSection() {
       icon: <Bot size={20} />,
       color: "bg-primary",
       welcome: t.chat.scenarios.octabot.welcome,
-      // Logic jawaban bot
       logic: (text: string) => {
         if (text.match(/harga|biaya|price|cost|pay|bayar/i)) return t.chat.scenarios.octabot.answers.price;
         if (text.match(/broadcast|sebar|blast/i)) return t.chat.scenarios.octabot.answers.broadcast;
@@ -39,7 +39,7 @@ export default function HeroSection() {
     },
     petshop: {
       name: t.chat.scenarios.petshop.name,
-      botName: "Meow Petshop",
+      botName: "Meow Petshop 🐱",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
       welcome: t.chat.scenarios.petshop.welcome,
@@ -51,7 +51,7 @@ export default function HeroSection() {
     },
     clothing: {
       name: t.chat.scenarios.clothing.name,
-      botName: "Fashion Store",
+      botName: "Fashion Store 👗",
       icon: <Shirt size={20} />,
       color: "bg-pink-500",
       welcome: t.chat.scenarios.clothing.welcome,
@@ -63,7 +63,7 @@ export default function HeroSection() {
     },
     digital: {
       name: t.chat.scenarios.digital.name,
-      botName: "Premium Apps",
+      botName: "Premium Apps 📱",
       icon: <Smartphone size={20} />,
       color: "bg-blue-500",
       welcome: t.chat.scenarios.digital.welcome,
@@ -77,7 +77,7 @@ export default function HeroSection() {
 
   const currentData = SCENARIOS[activeScenario];
 
-  // --- EFEK: RESET & JALANKAN DEMO BARU SAAT BAHASA/SKENARIO BERUBAH ---
+  // EFEK: RESET & JALANKAN DEMO BARU SAAT BAHASA/SKENARIO BERUBAH
   useEffect(() => {
     // 1. Reset State
     setIsDemoActive(true);
@@ -87,14 +87,14 @@ export default function HeroSection() {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
 
-    // 2. Tentukan Pertanyaan Dummy User (Agar terlihat hidup)
+    // 2. Pertanyaan Dummy (Agar demo terlihat hidup)
     let dummyQuestion = "";
     if (activeScenario === 'octabot') dummyQuestion = "Info Broadcast";
     else if (activeScenario === 'petshop') dummyQuestion = "Royal Canin?";
     else if (activeScenario === 'clothing') dummyQuestion = "Size XL?";
     else dummyQuestion = "Netflix?";
 
-    // 3. Susun Skenario Percakapan Lengkap (Welcome -> Tanya -> Jawab -> Closing)
+    // 3. Skenario Demo
     const demoScript = [
       { role: "bot", text: currentData.welcome, delay: 800 },
       { role: "user", text: dummyQuestion, delay: 2500 },
@@ -103,16 +103,14 @@ export default function HeroSection() {
       { role: "bot", text: language === 'id' ? "Silakan coba chat saya! 👇" : "Try chatting with me! 👇", delay: 6500 }
     ];
 
-    // 4. Jalankan Loop Animasi
     demoScript.forEach((msg, index) => {
-      // Logic Ngetik (Hanya untuk Bot)
+      // Logic Ngetik
       if (msg.role === "bot") {
         const typingStart = msg.delay - 800;
         const t1 = setTimeout(() => setIsTyping(true), typingStart > 0 ? typingStart : 0);
         timeoutsRef.current.push(t1);
       }
-
-      // Logic Muncul Pesan
+      // Logic Pesan Muncul
       const t2 = setTimeout(() => {
         setIsTyping(false);
         setMessages((prev) => [...prev, { id: index, role: msg.role as "user" | "bot", text: msg.text }]);
@@ -121,14 +119,12 @@ export default function HeroSection() {
     });
 
     return () => timeoutsRef.current.forEach(clearTimeout);
-  }, [activeScenario, language]); // Trigger saat bahasa/skenario berubah
+  }, [activeScenario, language]);
 
-  // Auto Scroll
   useEffect(() => {
     if (chatContainerRef.current) chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   }, [messages, isTyping]);
 
-  // Handler Kirim Pesan Manual
   const handleSendMessage = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!inputValue.trim()) return;
@@ -146,20 +142,67 @@ export default function HeroSection() {
       setMessages((prev) => [...prev, { id: Date.now(), role: "user", text }]);
       setIsTyping(true);
       setTimeout(() => {
-        // Panggil Logic Pintar
         // @ts-ignore
         const reply = currentData.logic ? currentData.logic(text) : "Bot Reply: " + text;
         setMessages((prev) => [...prev, { id: Date.now() + 1, role: "bot", text: reply }]);
         setIsTyping(false);
-      }, 1000 + Math.random() * 1000);
+      }, 1500);
     }, 10);
   };
 
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center gap-10 lg:gap-20 overflow-hidden">
+    // FIX GAP: justify-center dan gap-8 lg:gap-12 (sebelumnya lg:gap-20)
+    <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 overflow-hidden">
       
+      {/* --- BACKGROUND DECORATIONS (STATIC - DI POJOK) --- */}
+      {/* Container ini memiliki z-0 agar berada di belakang teks dan HP */}
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
+          
+          {/* 1. Pojok Kiri Atas (Top Left) */}
+          <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 md:translate-x-0 md:translate-y-0">
+             <Image 
+               src="robot.svg" // Pastikan nama file sesuai
+               alt="decoration top left" 
+               width={400} height={400} 
+               className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90"
+             />
+          </div>
+
+          {/* 2. Pojok Kanan Atas (Top Right) */}
+          <div className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 md:translate-x-0 md:translate-y-0">
+             <Image 
+               src="robot3.svg" // Pastikan nama file sesuai
+               alt="decoration top right" 
+               width={400} height={400} 
+               className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90"
+             />
+          </div>
+
+          {/* 3. Pojok Kiri Bawah (Bottom Left) */}
+          <div className="absolute bottom-0 left-0 -translate-x-1/4 translate-y-1/4 md:translate-x-0 md:translate-y-0">
+             <Image 
+               src="robot2.svg" // Pastikan nama file sesuai
+               alt="decoration bottom left" 
+               width={400} height={400} 
+               className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90"
+             />
+          </div>
+
+          {/* 4. Pojok Kanan Bawah (Bottom Right) */}
+          <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 md:translate-x-0 md:translate-y-0">
+             <Image 
+               src="/robot4.svg" // Pastikan nama file sesuai
+               alt="decoration bottom right" 
+               width={400} height={400} 
+               className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90"
+             />
+          </div>
+      </div>
+
       {/* TEXT HERO (TERJEMAHAN) */}
-      <div className="flex-1 space-y-8 text-center lg:text-left w-full z-10">
+      {/* FIX GAP: Tambahkan 'max-w-2xl' agar tidak mendorong chat terlalu jauh */}
+      {/* Ditambahkan z-10 agar berada di depan gambar background */}
+      <div className="flex-1 max-w-2xl space-y-8 text-center lg:text-left w-full z-10 relative">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
           <span className="relative flex h-2 w-2 mr-1">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -193,7 +236,10 @@ export default function HeroSection() {
       </div>
 
       {/* CHAT UI */}
-      <div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col md:flex-row gap-4 items-center md:items-end relative group">
+      {/* UPDATE: Ditambahkan 'md:justify-center' 
+          Ini akan membuat Sidebar dan Chatbox berada di tengah layar saat di mode Tablet 
+      */}
+      <div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col md:flex-row gap-4 items-center md:justify-center md:items-end relative group z-10">
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div>
 
         {/* SIDEBAR */}
