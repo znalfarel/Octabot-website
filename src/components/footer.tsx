@@ -52,7 +52,7 @@ export default function Footer() {
             
             {/* Social Icons */}
             <div className="flex items-center gap-4 pt-2">
-              <SocialLink href="#" icon={<Instagram size={18} />} />
+              <SocialLink href="https://instagram.com/octabot.id" icon={<Instagram size={18} />} />
               <SocialLink href="#" icon={<Twitter size={18} />} />
               <SocialLink href="#" icon={<Linkedin size={18} />} />
               <SocialLink href="#" icon={<Facebook size={18} />} />

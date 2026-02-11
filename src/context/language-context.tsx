@@ -11,10 +11,10 @@ export const DICTIONARY = {
       badge: "Beta Version",
       titleStart: "Otomatisasi",
       titleEnd: "Bisnis.",
-      // REVISI: Deskripsi Netral (Tanpa menunjuk kanan/bawah)
+      // Deskripsi Netral (Cocok untuk layout tengah/kiri)
       desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis secara interaktif!",
       btnPrimary: "Buat Bot",
-      
+      features: ["Setup Cepat", "Data Aman"],
       inputPlaceholder: "Ketik pesan...",
       demo: "Demo Mode"
     },
@@ -31,15 +31,18 @@ export const DICTIONARY = {
       }
     },
     features: {
-      title: "Fitur Unggulan",
-      subtitle: "Semua yang Anda butuhkan untuk mengelola chat pelanggan.",
+      title: "Ekosistem Fitur Lengkap",
+      subtitle: "Dari personal chat hingga manajemen komunitas, semua bisa diotomatisasi.",
       list: [
-        { title: "Auto Reply Cerdas", desc: "Balas ribuan pesan pelanggan secara otomatis 24/7 tanpa henti." },
-        { title: "Broadcast Anti-Banned", desc: "Kirim pesan massal dengan fitur delay pintar agar nomor tetap aman." },
-        { title: "Integrasi API", desc: "Hubungkan bot dengan database stok atau CRM Anda dengan mudah." }
+        { title: "Auto Reply Cerdas", desc: "Balas ribuan pesan pelanggan secara otomatis 24/7 tanpa henti dengan logic yang fleksibel." },
+        { title: "Broadcast Anti-Banned", desc: "Kirim pesan massal dengan fitur delay pintar dan rotasi pesan agar nomor tetap aman." },
+        { title: "Integrasi API & Webhook", desc: "Hubungkan bot dengan database stok, CRM, atau Google Sheets Anda secara real-time." },
+        { title: "Integrasi Grup WhatsApp", desc: "Tambahkan bot ke dalam grup komunitas atau tim kerja untuk memantau aktivitas member." },
+        { title: "Manajemen Grup Otomatis", desc: "Kick member yang melanggar aturan, sambut member baru, dan kelola admin secara otomatis." },
+        { title: "Transaksi Dalam Grup", desc: "Member bisa membeli produk, top-up saldo, atau bayar tagihan langsung di dalam chat grup." }
       ]
     },
-    // --- BAGIAN BARU: COMPARISON SECTION ---
+    // --- COMPARISON SECTION ---
     comparison: {
       title: "Mengapa Octabot Lebih Unggul?",
       subtitle: "Tinggalkan chatbot kaku. Beralihlah ke AI yang mengerti pelanggan.",
@@ -60,7 +63,6 @@ export const DICTIONARY = {
         ]
       }
     },
-    // ---------------------------------------
     cta: {
       title: "Siap Meningkatkan Bisnis Anda?",
       desc: "Bergabunglah dengan 500+ bisnis yang telah beralih ke otomatisasi.",
@@ -78,7 +80,7 @@ export const DICTIONARY = {
   en: {
     navbar: { items: ["Features", "Pricing", "Contact"], cta: "Start Now", choose: "Select Language" },
     hero: {
-      badge: "#1 Most Flexible WhatsApp Bot", titleStart: "Automate Your", titleEnd: "Business.",
+      badge: "Beta Version", titleStart: "Automate Your", titleEnd: "Business.",
       desc: "Rent custom WhatsApp bots for Online Stores, Clinics, or Services. Try simulating various businesses interactively!",
       btnPrimary: "Create Bot", features: ["Fast Setup", "Secure Data"], inputPlaceholder: "Type a message...", demo: "Demo Mode"
     },
@@ -92,12 +94,15 @@ export const DICTIONARY = {
       }
     },
     features: {
-      title: "Powerful Features",
-      subtitle: "Everything you need to manage customer chats.",
+      title: "Complete Feature Ecosystem",
+      subtitle: "From personal chats to community management, everything is automated.",
       list: [
-        { title: "Smart Auto Reply", desc: "Reply to thousands of messages automatically 24/7 non-stop." },
-        { title: "Anti-Ban Broadcast", desc: "Send bulk messages with smart delay to keep your number safe." },
-        { title: "API Integration", desc: "Connect the bot with your inventory database or CRM easily." }
+        { title: "Smart Auto Reply", desc: "Reply to thousands of messages automatically 24/7 non-stop with flexible logic." },
+        { title: "Anti-Ban Broadcast", desc: "Send bulk messages with smart delay and message rotation to keep your number safe." },
+        { title: "API & Webhook", desc: "Connect the bot with your inventory database, CRM, or Google Sheets in real-time." },
+        { title: "WhatsApp Group Integration", desc: "Add the bot to community or team groups to monitor member activity." },
+        { title: "Auto Group Management", desc: "Kick members who violate rules, welcome new members, and manage admins automatically." },
+        { title: "In-Group Transactions", desc: "Members can buy products, top-up balances, or pay bills directly inside the group chat." }
       ]
     },
     comparison: {
@@ -135,7 +140,7 @@ export const DICTIONARY = {
   es: {
     navbar: { items: ["Características", "Precios", "Contacto"], cta: "Empezar", choose: "Seleccionar Idioma" },
     hero: {
-      badge: "Bot de WhatsApp #1 Más Flexible", titleStart: "Automatiza tu", titleEnd: "Negocio.",
+      badge: "Beta Version", titleStart: "Automatiza tu", titleEnd: "Negocio.",
       desc: "Alquila bots de WhatsApp personalizados para Tiendas Online o Clínicas. ¡Prueba simulaciones interactivas ahora!",
       btnPrimary: "Crear Bot", features: ["Rápido", "Seguro"], inputPlaceholder: "Escribe un mensaje...", demo: "Modo Demo"
     },
@@ -149,12 +154,15 @@ export const DICTIONARY = {
       }
     },
     features: {
-      title: "Funciones Potentes",
-      subtitle: "Todo lo que necesitas para gestionar chats.",
+      title: "Ecosistema Completo",
+      subtitle: "Desde chats personales hasta gestión de comunidades.",
       list: [
         { title: "Auto Respuesta", desc: "Responde miles de mensajes automáticamente 24/7." },
         { title: "Difusión Segura", desc: "Envíos masivos con retraso inteligente anti-bloqueo." },
-        { title: "Integración API", desc: "Conecta el bot con tu base de datos o CRM fácilmente." }
+        { title: "Integración API", desc: "Conecta el bot con tu base de datos o CRM fácilmente." },
+        { title: "Integración de Grupos", desc: "Añade el bot a grupos para monitorizar la actividad." },
+        { title: "Gestión de Grupos", desc: "Expulsa miembros, da la bienvenida y gestiona admins." },
+        { title: "Transacciones en Grupo", desc: "Compras, recargas y pagos dentro del chat grupal." }
       ]
     },
     comparison: {
@@ -192,7 +200,7 @@ export const DICTIONARY = {
   ja: {
     navbar: { items: ["機能", "料金", "お問い合わせ"], cta: "開始", choose: "言語を選択" },
     hero: {
-      badge: "No.1 WhatsAppボット", titleStart: "ビジネスを", titleEnd: "自動化。",
+      badge: "Beta Version", titleStart: "ビジネスを", titleEnd: "自動化。",
       desc: "カスタムWhatsAppボットをレンタル。インタラクティブなシミュレーションを今すぐ体験！",
       btnPrimary: "ボット作成", features: ["高速", "安全"], inputPlaceholder: "メッセージ...", demo: "デモ"
     },
@@ -206,12 +214,15 @@ export const DICTIONARY = {
       }
     },
     features: {
-      title: "強力な機能",
-      subtitle: "顧客チャット管理に必要なすべて。",
+      title: "完全な機能エコシステム",
+      subtitle: "個人チャットからコミュニティ管理まで、すべてを自動化。",
       list: [
         { title: "スマート自動応答", desc: "24時間365日、何千ものメッセージに自動返信。" },
         { title: "BAN対策一斉送信", desc: "スマートな遅延機能で安全にメッセージを送信。" },
-        { title: "API連携", desc: "在庫データベースやCRMと簡単に接続。" }
+        { title: "API連携", desc: "在庫データベースやCRMと簡単に接続。" },
+        { title: "グループ統合", desc: "コミュニティやチームのグループにボットを追加。" },
+        { title: "グループ自動管理", desc: "ルール違反者のキック、新規メンバーの歓迎などを自動化。" },
+        { title: "グループ内取引", desc: "チャット内で商品の購入や支払いが可能。" }
       ]
     },
     comparison: {

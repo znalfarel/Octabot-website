@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, CheckCircle, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
 // 1. Import Variants untuk tipe data animasi
 import { motion, Variants } from "framer-motion"; 
 import { useLanguage } from "@/context/language-context";
@@ -298,7 +298,6 @@ export default function HeroSection() {
         <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 justify-center lg:justify-start text-sm text-muted-foreground">
             {featuresList.map((feat: string, i: number) => (
                <div key={i} className="flex items-center gap-2">
-                 <CheckCircle size={16} className="text-primary"/> {feat}
                </div>
             ))}
         </motion.div>
@@ -376,7 +375,7 @@ export default function HeroSection() {
                   className="w-full bg-muted/50 h-12 rounded-full border border-border/50 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/50"
                 />
                 <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
-                   <Send size={16} className="ml-0.5 mt-0.5" />
+                   <Send size={16} className="ml-0.1 mt-0.5" />
                 </button>
               </div>
            </form>
