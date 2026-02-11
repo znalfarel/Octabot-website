@@ -30,7 +30,7 @@ export default function NotFound() {
         <div className="relative w-40 h-40 mx-auto mb-6">
            <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse"></div>
            <Image 
-             src="/robot2.svg" 
+             src="/errorbot.svg" 
              alt="Robot Bingung" 
              width={160} 
              height={160} 
