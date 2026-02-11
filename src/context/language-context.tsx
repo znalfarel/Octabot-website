@@ -11,7 +11,6 @@ export const DICTIONARY = {
       badge: "Beta Version",
       titleStart: "Otomatisasi",
       titleEnd: "Bisnis.",
-      // Deskripsi Netral (Cocok untuk layout tengah/kiri)
       desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis secara interaktif!",
       btnPrimary: "Buat Bot",
       features: ["Setup Cepat", "Data Aman"],
@@ -42,7 +41,6 @@ export const DICTIONARY = {
         { title: "Transaksi Dalam Grup", desc: "Member bisa membeli produk, top-up saldo, atau bayar tagihan langsung di dalam chat grup." }
       ]
     },
-    // --- COMPARISON SECTION ---
     comparison: {
       title: "Mengapa Octabot Lebih Unggul?",
       subtitle: "Tinggalkan chatbot kaku. Beralihlah ke AI yang mengerti pelanggan.",
@@ -62,6 +60,14 @@ export const DICTIONARY = {
           { title: "Bisa Eksekusi", desc: "Membantu closing penjualan, booking jadwal, hingga input data." }
         ]
       }
+    },
+    notFound: {
+      code: "404",
+      title: "Waduh, Jalannya Buntu!",
+      desc: "Robot kami sudah mencari ke setiap sudut server, tapi halaman yang Anda tuju sepertinya sudah pindah atau memang tidak pernah ada.",
+      backHome: "Kembali ke Markas",
+      goBack: "Balik Aja",
+      footer: "Error Code: PAGE_NOT_FOUND_EXCEPTION"
     },
     cta: {
       title: "Siap Meningkatkan Bisnis Anda?",
@@ -125,6 +131,14 @@ export const DICTIONARY = {
         ]
       }
     },
+    notFound: {
+      code: "404",
+      title: "Oops, Dead End!",
+      desc: "Our robot searched every corner of the server, but the page you are looking for seems to have moved or never existed.",
+      backHome: "Back to Base",
+      goBack: "Go Back",
+      footer: "Error Code: PAGE_NOT_FOUND_EXCEPTION"
+    },
     cta: {
       title: "Ready to Scale Your Business?",
       desc: "Join 500+ businesses that have switched to automation.",
@@ -185,6 +199,14 @@ export const DICTIONARY = {
         ]
       }
     },
+    notFound: {
+      code: "404",
+      title: "¡Vaya, sin salida!",
+      desc: "Nuestro robot buscó en todos los rincones del servidor, pero la página que buscas parece haberse movido o nunca existió.",
+      backHome: "Volver a la Base",
+      goBack: "Regresar",
+      footer: "Código de Error: PAGE_NOT_FOUND_EXCEPTION"
+    },
     cta: {
       title: "¿Listo para Crecer?",
       desc: "Únete a más de 500 empresas que usan automatización.",
@@ -244,6 +266,14 @@ export const DICTIONARY = {
           { title: "実行可能", desc: "販売のクロージングや予約をサポートします。" }
         ]
       }
+    },
+    notFound: {
+      code: "404",
+      title: "おっと、行き止まり！",
+      desc: "ロボットがサーバーの隅々まで検索しましたが、お探しのページは移動したか、存在しないようです。",
+      backHome: "基地に戻る",
+      goBack: "戻る",
+      footer: "エラーコード: PAGE_NOT_FOUND_EXCEPTION"
     },
     cta: {
       title: "ビジネスを拡大しませんか？",
