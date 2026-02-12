@@ -14,15 +14,6 @@ export default function NotFound() {
   return (
     <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
       
-      {/* Background Decoration (Subtle) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden opacity-20">
-          <div className="absolute top-10 left-10 opacity-50">
-             <Image src="/robot.svg" alt="decoration" width={150} height={150} className="grayscale" />
-          </div>
-          <div className="absolute bottom-10 right-10 opacity-50">
-             <Image src="/robot3.svg" alt="decoration" width={150} height={150} className="grayscale" />
-          </div>
-      </div>
 
       <div className="relative z-10 text-center max-w-lg mx-auto space-y-8">
         

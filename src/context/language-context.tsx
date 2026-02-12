@@ -61,6 +61,18 @@ export const DICTIONARY = {
         ]
       }
     },
+    // --- FAQ SECTION (SUDAH DITAMBAHKAN) ---
+    faq: {
+      title: "Sering Ditanyakan (FAQ)",
+      subtitle: "Masih bingung? Cek jawaban dari pertanyaan yang paling sering muncul.",
+      list: [
+        { q: "Apa itu Octabot sebenarnya?", a: "Octabot adalah asisten WhatsApp otomatis (bot) yang bisa membalas chat, mengirim broadcast, dan mengelola grup bisnis kamu secara 24 jam nonstop tanpa perlu istirahat." },
+        { q: "Saya gaptek, susah nggak settingnya?", a: "Tenang aja! Kami desain dashboard Octabot semudah mungkin. Tinggal scan QR Code kayak WhatsApp Web, dan bot langsung aktif. Ada video tutorialnya juga kok." },
+        { q: "Nomor WhatsApp saya aman dari banned?", a: "Keamanan adalah prioritas kami. Octabot punya fitur 'Anti-Ban' dengan delay pesan pintar dan rotasi pesan agar aktivitasmu tetap terlihat natural di mata sistem WhatsApp." },
+        { q: "Bisa dipakai di HP atau harus Laptop?", a: "Octabot berbasis cloud (web). Jadi kamu bisa setting lewat Laptop/PC agar leluasa, tapi bot-nya tetap jalan di server kami meskipun HP kamu mati atau nggak ada sinyal." },
+        { q: "Ada garansi uang kembali?", a: "Pasti. Jika dalam 7 hari kamu merasa Octabot tidak membantu bisnismu, kami kembalikan uangmu 100% tanpa banyak tanya." }
+      ]
+    },
     notFound: {
       code: "404",
       title: "Waduh, Jalannya Buntu!",
@@ -131,6 +143,18 @@ export const DICTIONARY = {
         ]
       }
     },
+    // --- FAQ ENGLISH ---
+    faq: {
+      title: "Frequently Asked Questions",
+      subtitle: "Still confused? Check answers to the most common questions.",
+      list: [
+        { q: "What exactly is Octabot?", a: "Octabot is an automated WhatsApp assistant that replies to chats, sends broadcasts, and manages your business groups 24/7 without needing a break." },
+        { q: "I'm not tech-savvy, is it hard to set up?", a: "Don't worry! We designed the dashboard to be super simple. Just scan the QR Code like WhatsApp Web, and you're live. We have tutorials too." },
+        { q: "Is my WhatsApp number safe from bans?", a: "Security is priority. Octabot has 'Anti-Ban' features with smart message delays and rotation to keep your activity looking natural." },
+        { q: "Does it work on Mobile or PC only?", a: "Octabot is cloud-based. You set it up via Web (PC recommended), but the bot runs on our servers even if your phone is off or has no signal." },
+        { q: "Is there a money-back guarantee?", a: "Absolutely. If within 7 days you feel Octabot doesn't help your business, we'll refund 100% with no questions asked." }
+      ]
+    },
     notFound: {
       code: "404",
       title: "Oops, Dead End!",
@@ -199,6 +223,18 @@ export const DICTIONARY = {
         ]
       }
     },
+    // --- FAQ SPANISH ---
+    faq: {
+      title: "Preguntas Frecuentes",
+      subtitle: "¿Tienes dudas? Aquí las resolvemos.",
+      list: [
+        { q: "¿Qué es exactamente Octabot?", a: "Octabot es un asistente automatizado de WhatsApp que responde chats y gestiona grupos 24/7." },
+        { q: "¿Es difícil de configurar?", a: "¡Para nada! Solo escanea el código QR y listo. Es muy fácil de usar." },
+        { q: "¿Mi número está seguro?", a: "Sí. Usamos tecnología Anti-Ban con retrasos inteligentes para proteger tu número." },
+        { q: "¿Funciona si apago mi teléfono?", a: "Sí, Octabot funciona en la nube. Tu bot sigue trabajando aunque tu móvil esté apagado." },
+        { q: "¿Hay garantía de devolución?", a: "Sí, garantía de 7 días. Si no te gusta, te devolvemos tu dinero." }
+      ]
+    },
     notFound: {
       code: "404",
       title: "¡Vaya, sin salida!",
@@ -266,6 +302,18 @@ export const DICTIONARY = {
           { title: "実行可能", desc: "販売のクロージングや予約をサポートします。" }
         ]
       }
+    },
+    // --- FAQ JAPANESE ---
+    faq: {
+      title: "よくある質問",
+      subtitle: "不明な点はございますか？こちらをご確認ください。",
+      list: [
+        { q: "Octabotとは何ですか？", a: "Octabotは、チャットへの返信やグループ管理を24時間体制で行うWhatsApp自動化アシスタントです。" },
+        { q: "設定は難しいですか？", a: "ご安心ください！QRコードをスキャンするだけで簡単に設定できます。" },
+        { q: "WhatsAppアカウントは安全ですか？", a: "はい、BAN対策機能を搭載しており、人間のような自然な挙動でアカウントを保護します。" },
+        { q: "スマホの電源を切っても動きますか？", a: "はい、クラウドベースなので、スマホの電源が切れていてもボットは稼働し続けます。" },
+        { q: "返金保証はありますか？", a: "はい、7日間の全額返金保証があります。" }
+      ]
     },
     notFound: {
       code: "404",
