@@ -11,7 +11,6 @@ export const DICTIONARY = {
       badge: "Beta Version",
       titleStart: "Otomatisasi",
       titleEnd: "Bisnis.",
-      desc: "Sewa bot WhatsApp custom untuk Toko Online, Klinik, atau Layanan Jasa. Coba simulasi berbagai bisnis secara interaktif!",
       btnPrimary: "Buat Bot",
       features: ["Setup Cepat", "Data Aman"],
       inputPlaceholder: "Ketik pesan...",
@@ -99,7 +98,6 @@ export const DICTIONARY = {
     navbar: { items: ["Features", "Pricing", "Contact"], cta: "Start Now", choose: "Select Language" },
     hero: {
       badge: "Beta Version", titleStart: "Automate Your", titleEnd: "Business.",
-      desc: "Rent custom WhatsApp bots for Online Stores, Clinics, or Services. Try simulating various businesses interactively!",
       btnPrimary: "Create Bot", features: ["Fast Setup", "Secure Data"], inputPlaceholder: "Type a message...", demo: "Demo Mode"
     },
     chat: {
@@ -179,7 +177,6 @@ export const DICTIONARY = {
     navbar: { items: ["Características", "Precios", "Contacto"], cta: "Empezar", choose: "Seleccionar Idioma" },
     hero: {
       badge: "Beta Version", titleStart: "Automatiza tu", titleEnd: "Negocio.",
-      desc: "Alquila bots de WhatsApp personalizados para Tiendas Online o Clínicas. ¡Prueba simulaciones interactivas ahora!",
       btnPrimary: "Crear Bot", features: ["Rápido", "Seguro"], inputPlaceholder: "Escribe un mensaje...", demo: "Modo Demo"
     },
     chat: {
@@ -259,7 +256,6 @@ export const DICTIONARY = {
     navbar: { items: ["機能", "料金", "お問い合わせ"], cta: "開始", choose: "言語を選択" },
     hero: {
       badge: "Beta Version", titleStart: "ビジネスを", titleEnd: "自動化。",
-      desc: "カスタムWhatsAppボットをレンタル。インタラクティブなシミュレーションを今すぐ体験！",
       btnPrimary: "ボット作成", features: ["高速", "安全"], inputPlaceholder: "メッセージ...", demo: "デモ"
     },
     chat: {

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
-// 1. Import Variants untuk tipe data animasi
 import { motion, Variants } from "framer-motion"; 
 import { useLanguage } from "@/context/language-context";
 
@@ -22,16 +21,11 @@ export default function HeroSection() {
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // --- "SATPAM" DATA (PENTING) ---
   if (!t) return null; 
 
-  // --- BYPASS TYPESCRIPT ERROR DI SINI ---
-  // Kita ubah t.hero menjadi 'any' agar TS tidak protes soal 'features'
-  // Ini solusi paling ampuh untuk menghilangkan garis merah 'Property does not exist'
   const heroData = t.hero as any; 
   const featuresList = (heroData?.features && Array.isArray(heroData.features)) ? heroData.features : [];
 
-  // --- ANIMATION VARIANTS (DENGAN TIPE DATA YANG BENAR) ---
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,8 +65,6 @@ export default function HeroSection() {
     })
   };
 
-  // --- KONFIGURASI SCENARIO (SAFE MODE - MENGGUNAKAN ANY UNTUK CHAT JUGA) ---
-  // Kita bypass juga t.chat agar tidak ada potensi merah di bagian skenario
   const chatData = t.chat as any;
   const scenariosData = chatData?.scenarios || {};
 
@@ -134,10 +126,8 @@ export default function HeroSection() {
 
   const currentData = SCENARIOS[activeScenario];
 
-  // EFEK: RESET & JALANKAN DEMO
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    // 1. Reset State
     setIsDemoActive(true);
     setMessages([]);
     setInputValue("");
@@ -145,14 +135,12 @@ export default function HeroSection() {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
 
-    // 2. Pertanyaan Dummy (Agar demo terlihat hidup)
     let dummyQuestion = "";
     if (activeScenario === 'octabot') dummyQuestion = "Info Broadcast";
     else if (activeScenario === 'petshop') dummyQuestion = "Royal Canin?";
     else if (activeScenario === 'clothing') dummyQuestion = "Size XL?";
     else dummyQuestion = "Netflix?";
 
-    // 3. Skenario Demo
     const demoScript = [
       { role: "bot", text: currentData.welcome, delay: 800 },
       { role: "user", text: dummyQuestion, delay: 2500 },
@@ -162,13 +150,11 @@ export default function HeroSection() {
     ];
 
     demoScript.forEach((msg, index) => {
-      // Logic Ngetik
       if (msg.role === "bot") {
         const typingStart = msg.delay - 800;
         const t1 = setTimeout(() => setIsTyping(true), typingStart > 0 ? typingStart : 0);
         timeoutsRef.current.push(t1);
       }
-      // Logic Pesan Muncul
       const t2 = setTimeout(() => {
         setIsTyping(false);
         setMessages((prev) => [...prev, { id: index, role: msg.role as "user" | "bot", text: msg.text }]);
@@ -211,71 +197,28 @@ export default function HeroSection() {
   };
 
   return (
-    // FIX GAP: justify-center dan gap-8 lg:gap-12 (sebelumnya lg:gap-20)
-    <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 overflow-hidden">
+    // Penyesuaian: py-2 di mobile agar lebih naik ke atas, gap-4 agar teks & chatbot lebih rapat
+    <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
       
-      {/* --- BACKGROUND DECORATIONS (ANIMATED ROBOTS) --- */}
-      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
-          
-          {/* 1. Pojok Kiri Atas */}
-          <motion.div 
-            custom={0}
-            variants={bgRobotVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 md:translate-x-0 md:translate-y-0"
-          >
-             <Image src="/robot.svg" alt="decoration" width={400} height={400} className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
+      {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
+      <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
+          <motion.div custom={0} variants={bgRobotVariants} initial="hidden" animate="visible" className="absolute top-0 left-0 md:translate-x-0 md:translate-y-0">
+             <Image src="/robot.svg" alt="decoration" width={400} height={400} className="w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
           </motion.div>
-
-          {/* 2. Pojok Kanan Atas */}
-          <motion.div 
-            custom={1}
-            variants={bgRobotVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 md:translate-x-0 md:translate-y-0"
-          >
-             <Image src="/robot3.svg" alt="decoration" width={400} height={400} className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
+          <motion.div custom={1} variants={bgRobotVariants} initial="hidden" animate="visible" className="absolute top-0 right-0 md:translate-x-0 md:translate-y-0">
+             <Image src="/robot3.svg" alt="decoration" width={400} height={400} className="w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
           </motion.div>
-
-          {/* 3. Pojok Kiri Bawah */}
-          <motion.div 
-            custom={2}
-            variants={bgRobotVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute bottom-0 left-0 -translate-x-1/4 translate-y-1/4 md:translate-x-0 md:translate-y-0"
-          >
-             <Image src="/robot2.svg" alt="decoration" width={400} height={400} className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
+          <motion.div custom={2} variants={bgRobotVariants} initial="hidden" animate="visible" className="absolute bottom-0 left-0 md:translate-x-0 md:translate-y-0">
+             <Image src="/robot2.svg" alt="decoration" width={400} height={400} className="w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
           </motion.div>
-
-          {/* 4. Pojok Kanan Bawah */}
-          <motion.div 
-            custom={3}
-            variants={bgRobotVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 md:translate-x-0 md:translate-y-0"
-          >
-             <Image src="/robot4.svg" alt="decoration" width={400} height={400} className="w-[50vw] md:w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
+          <motion.div custom={3} variants={bgRobotVariants} initial="hidden" animate="visible" className="absolute bottom-0 right-0 md:translate-x-0 md:translate-y-0">
+             <Image src="/robot4.svg" alt="decoration" width={400} height={400} className="w-[30vw] max-w-[180px] h-auto opacity-90 dark:opacity-90" />
           </motion.div>
       </div>
 
-      {/* --- KIRI: TEXT HERO (ANIMATED) --- */}
-      <motion.div 
-        className="flex-1 max-w-2xl space-y-8 text-center lg:text-left w-full z-10 relative"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
-          <span className="relative flex h-2 w-2 mr-1">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-          </span>
-          {heroData?.badge || "Loading..."}
-        </motion.div>
+      {/* --- KIRI: TEXT HERO --- */}
+      {/* Penyesuaian: space-y-4 di mobile biar teks lebih rapat */}
+      <motion.div className="flex-1 max-w-2xl space-y-4 md:space-y-8 text-center lg:text-left w-full z-10 relative" variants={containerVariants} initial="hidden" animate="visible">
         
         <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
           {heroData?.titleStart} <br className="hidden sm:block"/>
@@ -288,13 +231,16 @@ export default function HeroSection() {
           {heroData?.desc}
         </motion.p>
         
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
-          <Link href="/register" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-base hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
-            {heroData?.btnPrimary || "Start"} <ArrowRight size={18}/>
+        {/* TOMBOL DESKTOP (Sembunyi di HP/Tablet) */}
+        <motion.div variants={itemVariants} className="hidden lg:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
+          <Link 
+            href="/register" 
+            className="bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#5B21B6] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
+          >
+            {heroData?.btnPrimary || "Start"} <ArrowRight size={20}/>
           </Link>
         </motion.div>
 
-        {/* LIST FEATURES (AMAN DARI ERROR) */}
         <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 justify-center lg:justify-start text-sm text-muted-foreground">
             {featuresList.map((feat: string, i: number) => (
                <div key={i} className="flex items-center gap-2">
@@ -303,83 +249,93 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* --- KANAN: CHAT UI (ANIMATED) --- */}
-      <motion.div 
-        className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col md:flex-row gap-4 items-center md:justify-center md:items-end relative group z-10"
-        variants={imageVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div>
+      {/* --- KANAN: CHAT UI & TOMBOL MOBILE --- */}
+      <motion.div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col items-center md:items-end relative group z-10" variants={imageVariants} initial="hidden" animate="visible">
+        
+        <div className="flex flex-col md:flex-row gap-4 items-center md:justify-center w-full relative">
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div>
 
-        {/* SIDEBAR */}
-        <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
-          {Object.entries(SCENARIOS).map(([key, data]) => (
-            <button key={key} onClick={() => setActiveScenario(key as ScenarioType)} className={`relative group/btn p-3 rounded-full transition-all duration-300 ${activeScenario === key ? `${data.color} text-white shadow-lg scale-110` : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"}`} title={data.name}>
-              {data.icon}
-              <span className="absolute z-50 whitespace-nowrap bg-foreground text-background text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none left-1/2 -translate-x-1/2 top-full mt-2 md:top-1/2 md:-translate-y-1/2 md:mt-0 md:left-auto md:translate-x-0 md:right-full md:mr-3">
-                {data.name}
-              </span>
-            </button>
-          ))}
-        </div>
+          {/* SIDEBAR */}
+          <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
+            {Object.entries(SCENARIOS).map(([key, data]) => (
+              <button key={key} onClick={() => setActiveScenario(key as ScenarioType)} className={`relative group/btn p-3 rounded-full transition-all duration-300 ${activeScenario === key ? `${data.color} text-white shadow-lg scale-110` : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"}`} title={data.name}>
+                {data.icon}
+                <span className="absolute z-50 whitespace-nowrap bg-foreground text-background text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none left-1/2 -translate-x-1/2 top-full mt-2 md:top-1/2 md:-translate-y-1/2 md:mt-0 md:left-auto md:translate-x-0 md:right-full md:mr-3">
+                  {data.name}
+                </span>
+              </button>
+            ))}
+          </div>
 
-        {/* HP CHAT */}
-        <div className="w-full max-w-md md:w-[400px] aspect-[4/5] bg-card/90 backdrop-blur-xl border border-border rounded-[2.5rem] p-4 sm:p-6 relative shadow-2xl flex flex-col transition-transform duration-500 order-1 md:order-2">
-           <div className="flex justify-between items-center mb-4 pb-4 border-b border-border/50">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center text-white ring-2 ring-background transition-colors duration-500`}>
-                    {currentData.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm transition-all duration-300">{currentData.botName}</h3>
-                    <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
-                      <span className={`w-1.5 h-1.5 rounded-full ${currentData.color} animate-pulse`}></span>
-                      {isDemoActive ? heroData?.demo : "Online"}
+          {/* HP CHAT */}
+          {/* Penyesuaian: Tinggi HP di lock ke h-[440px] (bentuk normal) khusus di mobile, desktop tetep aspect-[4/5] */}
+          <div className="w-full max-w-md md:w-[400px] h-[440px] md:h-auto md:aspect-[4/5] bg-card/90 backdrop-blur-xl border border-border rounded-[2.5rem] p-4 sm:p-6 relative shadow-2xl flex flex-col transition-transform duration-500 order-1 md:order-2">
+             <div className="flex justify-between items-center mb-4 pb-4 border-b border-border/50">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center text-white ring-2 ring-background transition-colors duration-500`}>
+                      {currentData.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-sm transition-all duration-300">{currentData.botName}</h3>
+                      <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
+                        <span className={`w-1.5 h-1.5 rounded-full ${currentData.color} animate-pulse`}></span>
+                        {isDemoActive ? heroData?.demo : "Online"}
+                      </div>
                     </div>
                   </div>
-                </div>
-                {!isDemoActive && (
-                  <button onClick={() => setIsDemoActive(true)} className="p-2 hover:bg-muted rounded-full transition-colors" title={t.chat?.reset}>
-                    <Sparkles size={14} className="text-muted-foreground" />
-                  </button>
-                )}
-           </div>
+                  {!isDemoActive && (
+                    <button onClick={() => setIsDemoActive(true)} className="p-2 hover:bg-muted rounded-full transition-colors" title={t.chat?.reset}>
+                      <Sparkles size={14} className="text-muted-foreground" />
+                    </button>
+                  )}
+             </div>
 
-           <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-border hover:scrollbar-thumb-primary/50">
-              {messages.map((msg) => (
-                <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                  <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} text-white rounded-bl-none shadow-md`}`}>
-                    {msg.text}
+             <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-border hover:scrollbar-thumb-primary/50">
+                {messages.map((msg) => (
+                  <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
+                    <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} text-white rounded-bl-none shadow-md`}`}>
+                      {msg.text}
+                    </div>
                   </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="flex justify-start animate-in fade-in duration-300">
-                  <div className={`bg-opacity-10 border border-opacity-20 px-4 py-3 rounded-2xl rounded-bl-none flex gap-1 ${currentData.color.replace('bg-', 'bg-')}/10 border-${currentData.color.replace('bg-', '')}/20`}>
-                    <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color}`}></span>
-                    <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color} [animation-delay:0.1s]`}></span>
-                    <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color} [animation-delay:0.2s]`}></span>
+                ))}
+                {isTyping && (
+                  <div className="flex justify-start animate-in fade-in duration-300">
+                    <div className={`bg-opacity-10 border border-opacity-20 px-4 py-3 rounded-2xl rounded-bl-none flex gap-1 ${currentData.color.replace('bg-', 'bg-')}/10 border-${currentData.color.replace('bg-', '')}/20`}>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color}`}></span>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color} [animation-delay:0.1s]`}></span>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${currentData.color} [animation-delay:0.2s]`}></span>
+                    </div>
                   </div>
+                )}
+             </div>
+             
+             <form onSubmit={handleSendMessage} className="mt-4 pt-3 border-t border-border/50">
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder={heroData?.inputPlaceholder}
+                    className="w-full bg-muted/50 h-12 rounded-full border border-border/50 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/50"
+                  />
+                  <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
+                     <Send size={16} className="ml-0.1 mt-0.5" />
+                  </button>
                 </div>
-              )}
-           </div>
-           
-           <form onSubmit={handleSendMessage} className="mt-4 pt-3 border-t border-border/50">
-              <div className="relative flex items-center">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder={heroData?.inputPlaceholder}
-                  className="w-full bg-muted/50 h-12 rounded-full border border-border/50 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/50"
-                />
-                <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
-                   <Send size={16} className="ml-0.1 mt-0.5" />
-                </button>
-              </div>
-           </form>
+             </form>
+          </div>
         </div>
+
+        {/* TOMBOL MOBILE/TABLET (Sembunyi di Desktop) */}
+        <div className="flex lg:hidden w-full mt-4 justify-center">
+          <Link 
+            href="/register" 
+            className="w-full max-w-md bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#5B21B6] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
+          >
+            {heroData?.btnPrimary || "Start"} <ArrowRight size={20}/>
+          </Link>
+        </div>
+
       </motion.div>
     </section>
   );
