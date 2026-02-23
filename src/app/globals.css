@@ -54,8 +54,9 @@
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(270 50% 10%);
 
-  --primary: hsl(270 85% 60%);       /* Ungu Utama Neon */
-  --primary-foreground: hsl(0 0% 100%);
+  /* 👇 DIUBAH: Warna Hijau Stabilo untuk Light Mode */
+  --primary: hsl(85 100% 45%);       /* Hijau Stabilo Solid */
+  --primary-foreground: hsl(0 0% 10%); /* Hitam gelap agar teks terbaca */
 
   --secondary: hsl(270 20% 96%);
   --secondary-foreground: hsl(270 50% 10%);
@@ -71,7 +72,8 @@
 
   --border: hsl(270 20% 92%);        /* Border halus */
   --input: hsl(270 20% 92%);
-  --ring: hsl(270 85% 60%);
+  /* 👇 DIUBAH: Ring focus mengikuti primary */
+  --ring: hsl(85 100% 45%);
   
   --radius: 1.5rem; /* Sudut membulat besar (style Dribbble) */
 }
@@ -87,8 +89,9 @@
   --popover: hsl(270 30% 7%);
   --popover-foreground: hsl(0 0% 100%);
 
-  --primary: hsl(270 85% 65%);       /* Ungu Neon Terang */
-  --primary-foreground: hsl(0 0% 100%);
+  /* 👇 DIUBAH: Warna Hijau Stabilo Neon untuk Dark Mode */
+  --primary: hsl(85 100% 55%);       /* Hijau Stabilo Neon Nyala */
+  --primary-foreground: hsl(0 0% 10%); /* Hitam gelap agar teks terbaca */
 
   --secondary: hsl(270 30% 12%);
   --secondary-foreground: hsl(0 0% 100%);
@@ -104,7 +107,8 @@
 
   --border: hsl(270 30% 15%);        /* Border tegas di dark mode */
   --input: hsl(270 30% 15%);
-  --ring: hsl(270 85% 65%);
+  /* 👇 DIUBAH: Ring focus mengikuti primary */
+  --ring: hsl(85 100% 55%);
 }
 
 /* --- 3. BASE STYLES --- */

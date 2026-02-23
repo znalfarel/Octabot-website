@@ -68,12 +68,14 @@ export default function HeroSection() {
   const chatData = t.chat as any;
   const scenariosData = chatData?.scenarios || {};
 
+  // PENYESUAIAN: Menambahkan 'textColor' agar saat background stabilo, teksnya otomatis gelap
   const SCENARIOS = {
     octabot: {
       name: scenariosData?.octabot?.name || "Octabot",
       botName: "Octabot AI",
       icon: <Bot size={20} />,
       color: "bg-primary",
+      textColor: "text-primary-foreground", // Teks gelap
       welcome: scenariosData?.octabot?.welcome || "Halo!",
       logic: (text: string) => {
         const ans = scenariosData?.octabot?.answers || {};
@@ -88,6 +90,7 @@ export default function HeroSection() {
       botName: "Meow Petshop 🐱",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
+      textColor: "text-white", // Tetap putih karena background orange
       welcome: scenariosData?.petshop?.welcome || "Meow!",
       logic: (text: string) => {
         const ans = scenariosData?.petshop?.answers || {};
@@ -101,6 +104,7 @@ export default function HeroSection() {
       botName: "Fashion Store 👗",
       icon: <Shirt size={20} />,
       color: "bg-pink-500",
+      textColor: "text-white", // Tetap putih
       welcome: scenariosData?.clothing?.welcome || "Hi!",
       logic: (text: string) => {
         const ans = scenariosData?.clothing?.answers || {};
@@ -114,6 +118,7 @@ export default function HeroSection() {
       botName: "Premium Apps 📱",
       icon: <Smartphone size={20} />,
       color: "bg-blue-500",
+      textColor: "text-white", // Tetap putih
       welcome: scenariosData?.digital?.welcome || "Hello!",
       logic: (text: string) => {
         const ans = scenariosData?.digital?.answers || {};
@@ -197,7 +202,6 @@ export default function HeroSection() {
   };
 
   return (
-    // Penyesuaian: py-2 di mobile agar lebih naik ke atas, gap-4 agar teks & chatbot lebih rapat
     <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
       
       {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
@@ -217,12 +221,12 @@ export default function HeroSection() {
       </div>
 
       {/* --- KIRI: TEXT HERO --- */}
-      {/* Penyesuaian: space-y-4 di mobile biar teks lebih rapat */}
       <motion.div className="flex-1 max-w-2xl space-y-4 md:space-y-8 text-center lg:text-left w-full z-10 relative" variants={containerVariants} initial="hidden" animate="visible">
         
         <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
           {heroData?.titleStart} <br className="hidden sm:block"/>
-          <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
+          {/* PENYESUAIAN: Hapus gradient, jadikan solid primary */}
+          <span className="text-primary">
             WhatsApp
           </span> {heroData?.titleEnd}
         </motion.h1>
@@ -231,11 +235,11 @@ export default function HeroSection() {
           {heroData?.desc}
         </motion.p>
         
-        {/* TOMBOL DESKTOP (Sembunyi di HP/Tablet) */}
+        {/* TOMBOL DESKTOP */}
         <motion.div variants={itemVariants} className="hidden lg:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
           <Link 
             href="/register" 
-            className="bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#5B21B6] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
+            className="bg-primary text-primary-foreground px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#3F6212] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
           >
             {heroData?.btnPrimary || "Start"} <ArrowRight size={20}/>
           </Link>
@@ -258,7 +262,7 @@ export default function HeroSection() {
           {/* SIDEBAR */}
           <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
             {Object.entries(SCENARIOS).map(([key, data]) => (
-              <button key={key} onClick={() => setActiveScenario(key as ScenarioType)} className={`relative group/btn p-3 rounded-full transition-all duration-300 ${activeScenario === key ? `${data.color} text-white shadow-lg scale-110` : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"}`} title={data.name}>
+              <button key={key} onClick={() => setActiveScenario(key as ScenarioType)} className={`relative group/btn p-3 rounded-full transition-all duration-300 ${activeScenario === key ? `${data.color} ${data.textColor} shadow-lg scale-110` : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"}`} title={data.name}>
                 {data.icon}
                 <span className="absolute z-50 whitespace-nowrap bg-foreground text-background text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none left-1/2 -translate-x-1/2 top-full mt-2 md:top-1/2 md:-translate-y-1/2 md:mt-0 md:left-auto md:translate-x-0 md:right-full md:mr-3">
                   {data.name}
@@ -268,11 +272,11 @@ export default function HeroSection() {
           </div>
 
           {/* HP CHAT */}
-          {/* Penyesuaian: Tinggi HP di lock ke h-[440px] (bentuk normal) khusus di mobile, desktop tetep aspect-[4/5] */}
           <div className="w-full max-w-md md:w-[400px] h-[440px] md:h-auto md:aspect-[4/5] bg-card/90 backdrop-blur-xl border border-border rounded-[2.5rem] p-4 sm:p-6 relative shadow-2xl flex flex-col transition-transform duration-500 order-1 md:order-2">
              <div className="flex justify-between items-center mb-4 pb-4 border-b border-border/50">
                   <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center text-white ring-2 ring-background transition-colors duration-500`}>
+                    {/* PENYESUAIAN: Menggunakan currentData.textColor */}
+                    <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center ${currentData.textColor} ring-2 ring-background transition-colors duration-500`}>
                       {currentData.icon}
                     </div>
                     <div>
@@ -293,7 +297,8 @@ export default function HeroSection() {
              <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-border hover:scrollbar-thumb-primary/50">
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                    <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} text-white rounded-bl-none shadow-md`}`}>
+                    {/* PENYESUAIAN: Menggunakan currentData.textColor di bubble chat */}
+                    <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} ${currentData.textColor} rounded-bl-none shadow-md`}`}>
                       {msg.text}
                     </div>
                   </div>
@@ -318,7 +323,8 @@ export default function HeroSection() {
                     placeholder={heroData?.inputPlaceholder}
                     className="w-full bg-muted/50 h-12 rounded-full border border-border/50 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/50"
                   />
-                  <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
+                  {/* PENYESUAIAN: Menggunakan currentData.textColor untuk icon pesawat kertas */}
+                  <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center ${currentData.textColor} shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
                      <Send size={16} className="ml-0.1 mt-0.5" />
                   </button>
                 </div>
@@ -329,8 +335,8 @@ export default function HeroSection() {
         {/* TOMBOL MOBILE/TABLET (Sembunyi di Desktop) */}
         <div className="flex lg:hidden w-full mt-4 justify-center">
           <Link 
-            href="/register" 
-            className="w-full max-w-md bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#5B21B6] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
+            href="/register"
+            className="w-full max-w-md bg-primary text-primary-foreground px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#3F6212] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
           >
             {heroData?.btnPrimary || "Start"} <ArrowRight size={20}/>
           </Link>

@@ -1,29 +1,33 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google"; 
+// 1. IMPORT FONT ANTI-MAINSTREAM YANG CHILL & KEREN
+import { DM_Sans, Lexend } from "next/font/google"; 
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-// 1. IMPORT LANGUAGE PROVIDER (Untuk fitur ganti bahasa)
+// IMPORT LANGUAGE PROVIDER
 import { LanguageProvider } from "@/context/language-context";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+// Konfigurasi Font Body (Bersih, elegan, dan sangat natural)
+const dmSans = DM_Sans({ 
+  subsets: ["latin"], 
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"]
+});
 
-// Konfigurasi Font Judul (Futuristik)
-const spaceGrotesk = Space_Grotesk({ 
+// Konfigurasi Font Judul (Lebar, asik, chill, dan sangat mudah dibaca)
+const lexend = Lexend({ 
   subsets: ["latin"], 
   variable: "--font-heading",
-  weight: ["300", "400", "500", "600", "700"] 
+  weight: ["300", "400", "500", "600", "700", "800"] 
 });
 
 export const metadata: Metadata = {
   title: "Octabot - Otomatisasi WhatsApp Modern",
   description: "Jasa penyewaan bot WA custom dengan fitur lengkap.",
   
-  // --- PERBAIKAN LOGO TAB BROWSER (FAVICON) ---
-  // Pastikan Anda memiliki file 'logo.png' (atau 'icon.png') di dalam folder 'public'
   icons: {
-    icon: "/icon.svg", // Ganti dengan "/icon.png" jika nama file Anda icon.png
+    icon: "/icon.svg", 
     shortcut: "/icon.svg",
     apple: "/icon.svg",
   },
@@ -36,12 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans`}>
+      {/* 2. APLIKASIKAN VARIABEL FONT BARU KE BODY */}
+      <body className={`${dmSans.variable} ${lexend.variable} antialiased font-sans`}>
         
-        {/* 2. BUNGKUS DENGAN LANGUAGE PROVIDER */}
         <LanguageProvider>
-          
-          {/* 3. BUNGKUS DENGAN THEME PROVIDER */}
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             <Navbar />
             <main className="min-h-screen pt-20">
@@ -49,7 +51,6 @@ export default function RootLayout({
             </main>
             <Footer />
           </ThemeProvider>
-          
         </LanguageProvider>
         
       </body>

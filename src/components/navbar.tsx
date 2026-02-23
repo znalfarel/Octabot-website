@@ -96,9 +96,10 @@ export default function Navbar() {
               </div>
 
               {/* TOMBOL DESKTOP 3D */}
+              {/* Penyesuaian: text-primary-foreground & shadow-[0_4px_0_#3F6212] */}
               <Link 
                 href="/login" 
-                className="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-[0_4px_0_#5B21B6] hover:brightness-110 active:translate-y-[4px] active:shadow-none"
+                className="bg-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-[0_4px_0_#3F6212] hover:brightness-110 active:translate-y-[4px] active:shadow-none"
               >
                 {t.navbar.cta}
               </Link>
@@ -139,10 +140,11 @@ export default function Navbar() {
         </div>
         <div className="w-full max-w-sm px-6 pb-10 mt-auto">
           {/* TOMBOL MOBILE 3D */}
+          {/* Penyesuaian: text-primary-foreground & shadow-[0_6px_0_#3F6212] */}
           <Link 
             href="/login" 
             onClick={() => setIsOpen(false)} 
-            className="flex justify-center items-center bg-primary text-white w-full py-4 rounded-2xl text-xl font-bold transition-all shadow-[0_6px_0_#5B21B6] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
+            className="flex justify-center items-center bg-primary text-primary-foreground w-full py-4 rounded-2xl text-xl font-bold transition-all shadow-[0_6px_0_#3F6212] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
           >
             {t.navbar.cta}
           </Link>

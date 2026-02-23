@@ -1,13 +1,13 @@
 "use client";
 
 import { useLanguage } from "@/context/language-context";
-import { XCircle, AlertTriangle, MessageSquare, Zap, Brain, CheckCircle2, TrendingUp, Bot } from "lucide-react";
+import { XCircle, AlertTriangle, MessageSquare, Star, Smile, CheckCircle2, HeartHandshake, Coffee } from "lucide-react";
 
 export default function ComparisonSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 bg-muted/30 relative overflow-hidden">
+    <section className="py-20 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         
         {/* Header Section */}
@@ -21,11 +21,12 @@ export default function ComparisonSection() {
         </div>
 
         {/* Comparison Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        {/* PENYESUAIAN: max-w-6xl diubah jadi max-w-5xl, dan gap-12 jadi gap-8 agar lebih padat dan rapi di tengah */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
           
-          {/* KIRI: TRADITIONAL CHATBOT (Grey/Muted Look) */}
-          <div className="bg-card/50 border border-border p-8 rounded-3xl flex flex-col relative group hover:border-red-200/50 transition-colors">
-            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-6">
+          {/* KIRI: TRADITIONAL CHATBOT (Boring & Flat Look) */}
+          <div className="bg-muted/30 border-2 border-border p-8 md:p-10 rounded-[2rem] flex flex-col relative transition-colors">
+            <div className="w-16 h-16 bg-muted/50 rounded-2xl flex items-center justify-center mb-6">
                <MessageSquare size={32} className="text-muted-foreground" />
             </div>
             
@@ -36,9 +37,9 @@ export default function ComparisonSection() {
             <div className="space-y-8 flex-1">
               {/* Point 1 */}
               <div className="flex gap-4">
-                <AlertTriangle className="text-red-400 shrink-0 mt-1" size={24} />
+                <AlertTriangle className="text-red-400/80 shrink-0 mt-1" size={24} />
                 <div>
-                  <h4 className="font-bold text-foreground/80">{t.comparison.traditional.points[0].title}</h4>
+                  <h4 className="font-bold text-foreground/70">{t.comparison.traditional.points[0].title}</h4>
                   <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                     {t.comparison.traditional.points[0].desc}
                   </p>
@@ -47,9 +48,9 @@ export default function ComparisonSection() {
               
               {/* Point 2 */}
               <div className="flex gap-4">
-                <XCircle className="text-red-400 shrink-0 mt-1" size={24} />
+                <XCircle className="text-red-400/80 shrink-0 mt-1" size={24} />
                 <div>
-                  <h4 className="font-bold text-foreground/80">{t.comparison.traditional.points[1].title}</h4>
+                  <h4 className="font-bold text-foreground/70">{t.comparison.traditional.points[1].title}</h4>
                   <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                     {t.comparison.traditional.points[1].desc}
                   </p>
@@ -58,9 +59,9 @@ export default function ComparisonSection() {
 
               {/* Point 3 */}
               <div className="flex gap-4">
-                <MessageSquare className="text-red-400 shrink-0 mt-1" size={24} />
+                <MessageSquare className="text-red-400/80 shrink-0 mt-1" size={24} />
                 <div>
-                  <h4 className="font-bold text-foreground/80">{t.comparison.traditional.points[2].title}</h4>
+                  <h4 className="font-bold text-foreground/70">{t.comparison.traditional.points[2].title}</h4>
                   <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                     {t.comparison.traditional.points[2].desc}
                   </p>
@@ -69,25 +70,22 @@ export default function ComparisonSection() {
             </div>
           </div>
 
-          {/* KANAN: OCTABOT AI (Highlighted/Primary Look) */}
-          <div className="bg-background border-2 border-primary/20 p-8 rounded-3xl flex flex-col relative shadow-2xl shadow-primary/5 ring-1 ring-primary/10 overflow-hidden">
+          {/* KANAN: OCTABOT AI (Chill, Fun, & Solid 3D Look) */}
+          <div className="bg-card border-2 border-primary p-8 md:p-10 rounded-[2rem] flex flex-col relative shadow-[8px_8px_0_#3F6212] md:shadow-[12px_12px_0_#3F6212] transition-transform hover:-translate-y-1 hover:shadow-[12px_16px_0_#3F6212] overflow-hidden">
             
-            {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
-               <Zap size={32} />
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 text-primary-foreground shadow-sm">
+               <Star size={32} fill="currentColor" />
             </div>
             
-            <h3 className="font-heading text-2xl font-bold mb-8 text-primary">
+            <h3 className="font-heading text-2xl font-bold mb-8 text-foreground">
               {t.comparison.octabot.title}
             </h3>
 
             <div className="space-y-8 flex-1 relative z-10">
-              {/* Point 1 */}
-              <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-1">
-                  <CheckCircle2 className="text-green-600 dark:text-green-400" size={20} />
+              {/* Point 1: Natural (Diganti ikon Smile) */}
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <Smile className="text-primary" size={22} />
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground">{t.comparison.octabot.points[0].title}</h4>
@@ -97,10 +95,10 @@ export default function ComparisonSection() {
                 </div>
               </div>
               
-              {/* Point 2 */}
-              <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-1">
-                  <Brain className="text-blue-600 dark:text-blue-400" size={20} />
+              {/* Point 2: Cerdas & Adaptif (Diganti ikon Empati/Salaman) */}
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <HeartHandshake className="text-primary" size={22} />
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground">{t.comparison.octabot.points[1].title}</h4>
@@ -110,10 +108,10 @@ export default function ComparisonSection() {
                 </div>
               </div>
 
-              {/* Point 3 */}
-              <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0 mt-1">
-                  <TrendingUp className="text-purple-600 dark:text-purple-400" size={20} />
+              {/* Point 3: Bisa Eksekusi (Diganti ikon Kopi/Santai) */}
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <Coffee className="text-primary" size={22} />
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground">{t.comparison.octabot.points[2].title}</h4>
@@ -122,14 +120,6 @@ export default function ComparisonSection() {
                   </p>
                 </div>
               </div>
-            </div>
-
-            {/* Visual Diagram Sederhana (Kanan Bawah) */}
-            <div className="hidden md:block absolute bottom-8 right-8 opacity-10 grayscale md:grayscale-0 md:opacity-20 pointer-events-none">
-               <div className="relative w-32 h-32 border-2 border-dashed border-primary rounded-full animate-spin-slow"></div>
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                 <Bot size={48} className="text-primary" />
-               </div>
             </div>
 
           </div>
