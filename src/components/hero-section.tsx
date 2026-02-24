@@ -7,12 +7,18 @@ import { ArrowRight, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-
 import { motion, Variants } from "framer-motion"; 
 import { useLanguage } from "@/context/language-context";
 import Snowfall from "react-snowfall";
+// PENYESUAIAN: Import useTheme
+import { useTheme } from "next-themes"; 
 
 type Message = { id: number; role: "user" | "bot"; text: string; };
 type ScenarioType = "octabot" | "petshop" | "clothing" | "digital";
 
 export default function HeroSection() {
   const { t, language } = useLanguage();
+  
+  // PENYESUAIAN: Deklarasi state untuk mendeteksi tema
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   const [activeScenario, setActiveScenario] = useState<ScenarioType>("octabot");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -21,6 +27,11 @@ export default function HeroSection() {
   const [isDemoActive, setIsDemoActive] = useState(true);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // PENYESUAIAN: useEffect untuk hydration mode tema
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!t) return null; 
 
@@ -69,14 +80,13 @@ export default function HeroSection() {
   const chatData = t.chat as any;
   const scenariosData = chatData?.scenarios || {};
 
-  // PENYESUAIAN: Menambahkan 'textColor' agar saat background stabilo, teksnya otomatis gelap
   const SCENARIOS = {
     octabot: {
       name: scenariosData?.octabot?.name || "Octabot",
       botName: "Octabot AI",
       icon: <Bot size={20} />,
       color: "bg-primary",
-      textColor: "text-primary-foreground", // Teks gelap
+      textColor: "text-primary-foreground", 
       welcome: scenariosData?.octabot?.welcome || "Halo!",
       logic: (text: string) => {
         const ans = scenariosData?.octabot?.answers || {};
@@ -91,7 +101,7 @@ export default function HeroSection() {
       botName: "Meow Petshop 🐱",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
-      textColor: "text-white", // Tetap putih karena background orange
+      textColor: "text-white", 
       welcome: scenariosData?.petshop?.welcome || "Meow!",
       logic: (text: string) => {
         const ans = scenariosData?.petshop?.answers || {};
@@ -105,7 +115,7 @@ export default function HeroSection() {
       botName: "Fashion Store 👗",
       icon: <Shirt size={20} />,
       color: "bg-pink-500",
-      textColor: "text-white", // Tetap putih
+      textColor: "text-white", 
       welcome: scenariosData?.clothing?.welcome || "Hi!",
       logic: (text: string) => {
         const ans = scenariosData?.clothing?.answers || {};
@@ -119,7 +129,7 @@ export default function HeroSection() {
       botName: "Premium Apps 📱",
       icon: <Smartphone size={20} />,
       color: "bg-blue-500",
-      textColor: "text-white", // Tetap putih
+      textColor: "text-white", 
       welcome: scenariosData?.digital?.welcome || "Hello!",
       logic: (text: string) => {
         const ans = scenariosData?.digital?.answers || {};
@@ -202,9 +212,15 @@ export default function HeroSection() {
     }, 10);
   };
 
+  // PENYESUAIAN: Logika penentuan warna salju
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const snowColor = currentTheme === 'dark' ? '#ffffff' : '#84cc16'; // Putih di mode gelap, hijau stabilo di terang
+
   return (
     <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
-      <Snowfall color="white" />
+      
+      {/* PENYESUAIAN: Snowfall dengan warna dinamis */}
+      {mounted && <Snowfall color={snowColor} />}
       
       {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
       <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
@@ -227,7 +243,6 @@ export default function HeroSection() {
         
         <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
           {heroData?.titleStart} <br className="hidden sm:block"/>
-          {/* PENYESUAIAN: Hapus gradient, jadikan solid primary */}
           <span className="text-primary">
             WhatsApp
           </span> {heroData?.titleEnd}
@@ -259,7 +274,6 @@ export default function HeroSection() {
       <motion.div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col items-center md:items-end relative group z-10" variants={imageVariants} initial="hidden" animate="visible">
         
         <div className="flex flex-col md:flex-row gap-4 items-center md:justify-center w-full relative">
-          {/* <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div> */}
 
           {/* SIDEBAR */}
           <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
@@ -277,7 +291,6 @@ export default function HeroSection() {
           <div className="w-full max-w-md md:w-[400px] h-[440px] md:h-auto md:aspect-[4/5] bg-card/90 backdrop-blur-xl border border-border rounded-[2.5rem] p-4 sm:p-6 relative shadow-2xl flex flex-col transition-transform duration-500 order-1 md:order-2">
              <div className="flex justify-between items-center mb-4 pb-4 border-b border-border/50">
                   <div className="flex items-center gap-3">
-                    {/* PENYESUAIAN: Menggunakan currentData.textColor */}
                     <div className={`w-10 h-10 rounded-full ${currentData.color} flex items-center justify-center ${currentData.textColor} ring-2 ring-background transition-colors duration-500`}>
                       {currentData.icon}
                     </div>
@@ -299,7 +312,6 @@ export default function HeroSection() {
              <div ref={chatContainerRef} className="flex-1 space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-border hover:scrollbar-thumb-primary/50">
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                    {/* PENYESUAIAN: Menggunakan currentData.textColor di bubble chat */}
                     <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed transition-colors duration-500 ${msg.role === 'user' ? 'bg-muted/50 border border-border text-foreground rounded-br-none' : `${currentData.color} ${currentData.textColor} rounded-bl-none shadow-md`}`}>
                       {msg.text}
                     </div>
@@ -325,7 +337,6 @@ export default function HeroSection() {
                     placeholder={heroData?.inputPlaceholder}
                     className="w-full bg-muted/50 h-12 rounded-full border border-border/50 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/50"
                   />
-                  {/* PENYESUAIAN: Menggunakan currentData.textColor untuk icon pesawat kertas */}
                   <button type="submit" disabled={!inputValue.trim()} className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center ${currentData.textColor} shadow-md hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all ${currentData.color}`}>
                      <Send size={16} className="ml-0.1 mt-0.5" />
                   </button>
