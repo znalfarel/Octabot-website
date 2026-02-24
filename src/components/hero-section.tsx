@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
 import { motion, Variants } from "framer-motion"; 
 import { useLanguage } from "@/context/language-context";
+import Snowfall from "react-snowfall";
 
 type Message = { id: number; role: "user" | "bot"; text: string; };
 type ScenarioType = "octabot" | "petshop" | "clothing" | "digital";
@@ -203,6 +204,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
+      <Snowfall color="white" />
       
       {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
       <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
@@ -238,7 +240,7 @@ export default function HeroSection() {
         {/* TOMBOL DESKTOP */}
         <motion.div variants={itemVariants} className="hidden lg:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
           <Link 
-            href="/register" 
+            href="/pricing" 
             className="bg-primary text-primary-foreground px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-[0_6px_0_#3F6212] hover:brightness-110 active:translate-y-[6px] active:shadow-none"
           >
             {heroData?.btnPrimary || "Start"} <ArrowRight size={20}/>
@@ -257,7 +259,7 @@ export default function HeroSection() {
       <motion.div className="flex-1 lg:flex-none w-full lg:w-auto flex flex-col items-center md:items-end relative group z-10" variants={imageVariants} initial="hidden" animate="visible">
         
         <div className="flex flex-col md:flex-row gap-4 items-center md:justify-center w-full relative">
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div>
+          {/* <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-40 transition-colors duration-700 ${currentData.color.replace('bg-', 'bg-')}/30`}></div> */}
 
           {/* SIDEBAR */}
           <div className="w-full md:w-20 bg-card/80 backdrop-blur-xl border border-border rounded-2xl md:rounded-[2rem] p-2 flex flex-row md:flex-col gap-3 justify-evenly md:justify-center items-center shadow-lg order-2 md:order-1 transition-all">
