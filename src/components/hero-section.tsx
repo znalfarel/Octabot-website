@@ -98,7 +98,7 @@ export default function HeroSection() {
     },
     petshop: {
       name: scenariosData?.petshop?.name || "Petshop",
-      botName: "Meow Petshop 🐱",
+      botName: "Meow Petshop",
       icon: <Cat size={20} />,
       color: "bg-orange-500",
       textColor: "text-white", 
@@ -112,7 +112,7 @@ export default function HeroSection() {
     },
     clothing: {
       name: scenariosData?.clothing?.name || "Clothing",
-      botName: "Fashion Store 👗",
+      botName: "Fashion Store",
       icon: <Shirt size={20} />,
       color: "bg-pink-500",
       textColor: "text-white", 
@@ -126,7 +126,7 @@ export default function HeroSection() {
     },
     digital: {
       name: scenariosData?.digital?.name || "Digital",
-      botName: "Premium Apps 📱",
+      botName: "Premium Apps",
       icon: <Smartphone size={20} />,
       color: "bg-blue-500",
       textColor: "text-white", 
@@ -244,8 +244,8 @@ export default function HeroSection() {
         <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
           {heroData?.titleStart} <br className="hidden sm:block"/>
           <span className="text-primary">
-            WhatsApp
-          </span> {heroData?.titleEnd}
+            {heroData?.titleEnd}
+          </span> 
         </motion.h1>
         
         <motion.p variants={itemVariants} className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">

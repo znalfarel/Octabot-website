@@ -8,11 +8,9 @@ export const DICTIONARY = {
   id: {
     navbar: { items: ["Fitur", "Harga", "Kontak"], cta: "Mulai Sekarang", choose: "Pilih Bahasa" },
     hero: {
-      badge: "Beta Version",
-      titleStart: "Otomatisasi",
-      titleEnd: "Bisnis.",
+      titleStart: "Otomatisasikan",
+      titleEnd: "Bisnismu.",
       btnPrimary: "Buat Bot",
-      features: ["Setup Cepat", "Data Aman"],
       inputPlaceholder: "Ketik pesan...",
       demo: "Demo Mode"
     },
@@ -83,7 +81,7 @@ export const DICTIONARY = {
     cta: {
       title: "Siap Meningkatkan Bisnis Anda?",
       desc: "Bergabunglah dengan 500+ bisnis yang telah beralih ke otomatisasi.",
-      btn: "Mulai Gratis Sekarang"
+      btn: "Mulai Sekarang"
     },
     footer: {
       desc: "Platform otomatisasi WhatsApp terbaik untuk UMKM dan Enterprise.",
@@ -164,7 +162,7 @@ export const DICTIONARY = {
     cta: {
       title: "Ready to Scale Your Business?",
       desc: "Join 500+ businesses that have switched to automation.",
-      btn: "Start Free Trial"
+      btn: "Start Now"
     },
     footer: {
       desc: "The best WhatsApp automation platform for SMBs and Enterprises.",
@@ -243,7 +241,7 @@ export const DICTIONARY = {
     cta: {
       title: "¿Listo para Crecer?",
       desc: "Únete a más de 500 empresas que usan automatización.",
-      btn: "Prueba Gratis"
+      btn: "Empezar Ahora"
     },
     footer: {
       desc: "La mejor plataforma de automatización para empresas.",
@@ -322,7 +320,7 @@ export const DICTIONARY = {
     cta: {
       title: "ビジネスを拡大しませんか？",
       desc: "500社以上の企業が自動化に切り替えています。",
-      btn: "無料で試す"
+      btn: "今すぐ始める"
     },
     footer: {
       desc: "最高のWhatsApp自動化プラットフォーム。",

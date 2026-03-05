@@ -3,6 +3,8 @@ import FeaturesSection from "@/components/features-section";
 import CtaSection from "@/components/cta-section";
 import ComparisonSection from "@/components/comparison-section";
 import FAQSection from "@/components/faq-section";
+import IntegrationPage from "@/components/integration-section";
+import IntegrationMarquee from "@/components/integrationMarquee";
 
 export default function Home() {
   return (
@@ -11,6 +13,8 @@ export default function Home() {
       <div className="h-px bg-border container mx-auto opacity-50"></div> {/* Subtle Divider */}
       <FeaturesSection />
       <ComparisonSection />
+      <IntegrationPage />
+      <IntegrationMarquee />
       <FAQSection />
       <CtaSection />
     </>
