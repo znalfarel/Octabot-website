@@ -1,36 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Globe, Facebook, Send, MessageCircle, Bot, Instagram, ShoppingBag, Mail } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function IntegrationMarquee() {
-  // Daftar icon aplikasi sesuai urutan di gambar
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Mencegah error hydration di Next.js saat mendeteksi tema
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // GANTI NAMA FILE DI BAWAH SESUAIKAN DENGAN NAMA GAMBARMU DI FOLDER PUBLIC
   const apps = [
-    { name: "Website", icon: <Globe size={32} />, color: "text-slate-400" },
-    { name: "Facebook", icon: <Facebook size={32} />, color: "text-blue-500" },
-    { name: "Telegram", icon: <Send size={32} />, color: "text-sky-500" },
-    { name: "WhatsApp", icon: <MessageCircle size={32} />, color: "text-green-500" },
+    { name: "Website", image: "/logososmed/globe.svg" },
+    { name: "Facebook", image: "/logososmed/fb.svg" },
+    { name: "Telegram", image: "/logososmed/tele.svg" },
+    { name: "WhatsApp", image: "/logososmed/wa.svg" },
     { 
       name: "Octabot", 
-      icon: <Bot size={32} />, 
-      color: "text-primary", 
-      isHighlight: true // Ini yang bikin dia beda sendiri (warna stabilo)
+      // Siapkan 2 gambar: untuk mode terang (biasanya logo gelap) dan mode gelap (biasanya logo putih)
+      imageLight: "/logo-light.svg", 
+      imageDark: "/logo-dark.svg", 
+      isHighlight: true // Tetap pakai highlight hijau stabilo
     },
-    { name: "Instagram", icon: <Instagram size={32} />, color: "text-pink-500" },
-    { name: "Shopee", icon: <ShoppingBag size={32} />, color: "text-orange-500" },
-    { name: "Gmail", icon: <Mail size={32} />, color: "text-red-400" },
+    { name: "Instagram", image: "/logososmed/ig.svg" },
+    { name: "Shopee", image: "/logososmed/shopi.svg" },
+    { name: "Gmail", image: "/logososmed/gmail.svg" },
   ];
 
-  // Gandakan array agar animasinya bisa looping tanpa putus
+  // Gandakan array agar animasinya looping tanpa putus
   const duplicatedApps = [...apps, ...apps, ...apps];
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
-    // PENYESUAIAN: w-full tanpa max-width agar merentang penuh dari ujung ke ujung
-    <div className="w-full py-16 overflow-hidden relative bg-transparent">
+    <div className="w-full py-12 md:py-16 overflow-hidden relative bg-transparent">
       
       {/* JUDUL SECTION */}
-      <div className="text-center mb-10 px-4">
-        <h2 className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
+      <div className="text-center mb-8 md:mb-10 px-4">
+        <h2 className="text-xs sm:text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
           Kami Mendukung Integrasi
         </h2>
       </div>
@@ -38,40 +49,51 @@ export default function IntegrationMarquee() {
       {/* Container Animasi Marquee (Full Width) */}
       <div className="relative flex overflow-hidden z-0 w-full">
         
-        {/* Efek Fade di ujung kiri dan kanan biar nyatu sama background secara mulus */}
-        {/* Menggunakan "from-background" agar warnanya sama dengan warna dasar web */}
-        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+        {/* Efek Fade transparan di ujung kiri & kanan - Responsif di HP & PC */}
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
 
         <motion.div
-          // Tambahkan py-4 agar shadow tidak kepotong saat animasi
-          className="flex gap-6 md:gap-8 items-center w-max pl-6 py-4"
-          // Bergerak dari 0% ke -33.33% (karena kita pakai 3 set array)
+          className="flex gap-4 sm:gap-6 md:gap-8 items-center w-max pl-4 sm:pl-6 py-4"
           animate={{ x: ["0%", "-33.33%"] }}
           transition={{
             ease: "linear",
-            duration: 25, // Kecepatan jalannya (Makin kecil makin ngebut)
+            duration: 25, 
             repeat: Infinity,
           }}
         >
-          {duplicatedApps.map((app, index) => (
-            <div
-              key={index}
-              className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl border-2 transition-all duration-300
-                ${
-                  app.isHighlight
-                    // Styling khusus untuk Octabot (Highlight Hijau Stabilo)
-                    ? "bg-primary/10 border-primary shadow-[4px_4px_0_#3F6212] scale-110 mx-2"
-                    // Styling standar aplikasi lain (Tetap Neo-Brutalist)
-                    : "bg-card border-border shadow-[4px_4px_0_var(--color-border)] hover:border-primary/50 hover:-translate-y-1"
-                }
-              `}
-            >
-              <div className={`${app.color} transition-transform duration-300 hover:scale-110`}>
-                {app.icon}
+          {duplicatedApps.map((app, index) => {
+            // Logika penentuan gambar (khusus Octabot yang punya 2 mode)
+            let imgSrc = app.image || "";
+            if (app.isHighlight) {
+              imgSrc = mounted && currentTheme === "dark" ? app.imageDark! : app.imageLight!;
+            }
+
+            return (
+              <div
+                key={index}
+                // Ukuran kotak dibikin bertahap: HP (w-16) -> Tablet (w-20) -> PC (w-24)
+                className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl border-2 transition-all duration-300
+                  ${
+                    app.isHighlight
+                      ? "bg-primary/10 border-primary shadow-[4px_4px_0_#3F6212] scale-110 mx-2"
+                      : "bg-card border-border shadow-[4px_4px_0_var(--color-border)] hover:border-primary/50 hover:-translate-y-1"
+                  }
+                `}
+              >
+                {/* Tempat render gambar custom - Ukuran gambar juga responsif */}
+                <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 transition-transform duration-300 hover:scale-110">
+                  <Image 
+                    src={imgSrc} 
+                    alt={app.name} 
+                    fill 
+                    className="object-contain drop-shadow-sm"
+                    sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
       
