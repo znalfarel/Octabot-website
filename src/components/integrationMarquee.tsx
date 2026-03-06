@@ -17,6 +17,7 @@ export default function IntegrationMarquee() {
   // GANTI NAMA FILE DI BAWAH SESUAIKAN DENGAN NAMA GAMBARMU DI FOLDER PUBLIC
   const apps = [
     { name: "Website", image: "/logososmed/globe.svg" },
+    { name: "SpreedSheet", image: "/logososmed/sheet.svg" },
     { name: "Facebook", image: "/logososmed/fb.svg" },
     { name: "Telegram", image: "/logososmed/tele.svg" },
     { name: "WhatsApp", image: "/logososmed/wa.svg" },
