@@ -1,10 +1,24 @@
 "use client";
 
 import { useLanguage } from "@/context/language-context";
-import { XCircle, AlertTriangle, MessageSquare, Star, Smile, CheckCircle2, HeartHandshake, Coffee } from "lucide-react";
+import { XCircle, AlertTriangle, MessageSquare, Smile, CheckCircle2, HeartHandshake, Coffee } from "lucide-react";
+// 1. Import Image, useTheme, dan hooks React
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 export default function ComparisonSection() {
   const { t } = useLanguage();
+
+  // 2. Setup pendeteksi tema
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <section className="py-20 bg-background relative overflow-hidden">
@@ -21,7 +35,6 @@ export default function ComparisonSection() {
         </div>
 
         {/* Comparison Grid */}
-        {/* PENYESUAIAN: max-w-6xl diubah jadi max-w-5xl, dan gap-12 jadi gap-8 agar lebih padat dan rapi di tengah */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
           
           {/* KIRI: TRADITIONAL CHATBOT (Boring & Flat Look) */}
@@ -73,8 +86,17 @@ export default function ComparisonSection() {
           {/* KANAN: OCTABOT AI (Chill, Fun, & Solid 3D Look) */}
           <div className="bg-card border-2 border-primary p-8 md:p-10 rounded-[2rem] flex flex-col relative shadow-[8px_8px_0_#3F6212] md:shadow-[12px_12px_0_#3F6212] transition-transform hover:-translate-y-1 hover:shadow-[12px_16px_0_#3F6212] overflow-hidden">
             
-            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 text-primary-foreground shadow-sm">
-               <Star size={32} fill="currentColor" />
+            {/* 3. WADAH LOGO BARU */}
+            <div className="relative w-16 h-16 bg-primary/10 border-2 border-primary rounded-2xl flex items-center justify-center mb-6 shadow-sm overflow-hidden">
+               {/* Gunakan gambar dark/light sesuai tema */}
+               {mounted && (
+                 <Image 
+                   src={currentTheme === "dark" ? "/logo-dark.svg" : "/logo-light.svg"}
+                   alt="Logo Octabot"
+                   fill
+                   className="object-contain p-2.5 drop-shadow-sm transition-transform hover:scale-110"
+                 />
+               )}
             </div>
             
             <h3 className="font-heading text-2xl font-bold mb-8 text-foreground">
@@ -82,7 +104,7 @@ export default function ComparisonSection() {
             </h3>
 
             <div className="space-y-8 flex-1 relative z-10">
-              {/* Point 1: Natural (Diganti ikon Smile) */}
+              {/* Point 1: Natural */}
               <div className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
                   <Smile className="text-primary" size={22} />
@@ -95,7 +117,7 @@ export default function ComparisonSection() {
                 </div>
               </div>
               
-              {/* Point 2: Cerdas & Adaptif (Diganti ikon Empati/Salaman) */}
+              {/* Point 2: Cerdas & Adaptif */}
               <div className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
                   <HeartHandshake className="text-primary" size={22} />
@@ -108,7 +130,7 @@ export default function ComparisonSection() {
                 </div>
               </div>
 
-              {/* Point 3: Bisa Eksekusi (Diganti ikon Kopi/Santai) */}
+              {/* Point 3: Bisa Eksekusi */}
               <div className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
                   <Coffee className="text-primary" size={22} />
