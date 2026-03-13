@@ -212,15 +212,14 @@ export default function HeroSection() {
     }, 10);
   };
 
-  // PENYESUAIAN: Logika penentuan warna salju
-  const currentTheme = theme === 'system' ? systemTheme : theme;
-  const snowColor = currentTheme === 'dark' ? '#ffffff' : '#84cc16'; // Putih di mode gelap, hijau stabilo di terang
+  // // PENYESUAIAN: Logika penentuan warna salju
+  // const currentTheme = theme === 'system' ? systemTheme : theme;
+  // const snowColor = currentTheme === 'dark' ? '#ffffff' : '#84cc16'; // Putih di mode gelap, hijau stabilo di terang
 
   return (
     <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
       
-      {/* PENYESUAIAN: Snowfall dengan warna dinamis */}
-      {mounted && <Snowfall color={snowColor} />}
+      {/* {mounted && <Snowfall color={snowColor} />} */}
       
       {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
       <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">
