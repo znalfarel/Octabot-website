@@ -45,8 +45,13 @@ export default function Navbar() {
   // Class untuk Tombol Utama CTA (Solid Hijau Stabilo, Teks Gelap)
   const primary3DButtonClass = "bg-primary text-primary-foreground rounded-xl transition-all shadow-[0_4px_0_#3F6212] hover:brightness-110 active:translate-y-[4px] active:shadow-none font-bold";
 
-  // FIX: Tombol Sekunder - Teks Hitam di Light Mode, Hijau Stabilo di Dark Mode + Border Tipis Stabilo
-  const secondary3DButtonClass = "bg-white dark:bg-card text-black dark:text-primary border border-primary rounded-xl transition-all shadow-[0_4px_0_#3F6212] hover:brightness-110 active:translate-y-[4px] active:shadow-none font-bold";
+  // JURUS PAMUNGKAS: Kita bypass Tailwind! Pakai logika Javascript langsung biar warnanya tunduk 100% sama tombol Toggle
+  const isDarkMode = mounted && currentTheme === 'dark';
+  const secondary3DButtonClass = `border border-primary rounded-xl transition-all shadow-[0_4px_0_#3F6212] hover:brightness-110 active:translate-y-[4px] active:shadow-none font-bold ${
+    isDarkMode 
+      ? 'bg-card text-primary' // Di Mode Gelap: Background card, Teks Hijau Stabilo
+      : 'bg-white text-black'  // Di Mode Terang: Background putih, Teks HITAM PEKAT
+  }`;
 
   return (
     <nav className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${scrolled ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent border-transparent"}`}>
