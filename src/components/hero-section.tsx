@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Bot, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
+// Ikon 'Bot' sudah dihapus dari import karena diganti logo custom
+import { ArrowRight, Send, Cat, Shirt, Smartphone, Sparkles } from "lucide-react";
 import { motion, Variants } from "framer-motion"; 
 import { useLanguage } from "@/context/language-context";
 import Snowfall from "react-snowfall";
-// PENYESUAIAN: Import useTheme
 import { useTheme } from "next-themes"; 
 
 type Message = { id: number; role: "user" | "bot"; text: string; };
@@ -16,7 +16,6 @@ type ScenarioType = "octabot" | "petshop" | "clothing" | "digital";
 export default function HeroSection() {
   const { t, language } = useLanguage();
   
-  // PENYESUAIAN: Deklarasi state untuk mendeteksi tema
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -28,7 +27,6 @@ export default function HeroSection() {
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // PENYESUAIAN: useEffect untuk hydration mode tema
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -84,7 +82,12 @@ export default function HeroSection() {
     octabot: {
       name: scenariosData?.octabot?.name || "Octabot",
       botName: "Octabot AI",
-      icon: <Bot size={20} />,
+      // 👇 FIX LOGO: Ganti "/icon.png" dengan path/nama file gambar logomu sendiri
+      icon: (
+        <div className="relative w-5 h-5">
+          <Image src="/logo-dark.svg" alt="Octabot Logo" fill className="object-contain drop-shadow-sm" />
+        </div>
+      ),
       color: "bg-primary",
       textColor: "text-primary-foreground", 
       welcome: scenariosData?.octabot?.welcome || "Halo!",
@@ -212,14 +215,8 @@ export default function HeroSection() {
     }, 10);
   };
 
-  // // PENYESUAIAN: Logika penentuan warna salju
-  // const currentTheme = theme === 'system' ? systemTheme : theme;
-  // const snowColor = currentTheme === 'dark' ? '#ffffff' : '#84cc16'; // Putih di mode gelap, hijau stabilo di terang
-
   return (
     <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12 overflow-hidden">
-      
-      {/* {mounted && <Snowfall color={snowColor} />} */}
       
       {/* --- BACKGROUND DECORATIONS (Hanya muncul di Desktop) --- */}
       <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none select-none overflow-hidden">

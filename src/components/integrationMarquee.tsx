@@ -9,7 +9,6 @@ export default function IntegrationMarquee() {
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Mencegah error hydration di Next.js saat mendeteksi tema
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -23,22 +22,20 @@ export default function IntegrationMarquee() {
     { name: "WhatsApp", image: "/logososmed/wa.svg" },
     { 
       name: "Octabot", 
-      // Siapkan 2 gambar: untuk mode terang (biasanya logo gelap) dan mode gelap (biasanya logo putih)
       imageLight: "/logo-light.svg", 
       imageDark: "/logo-dark.svg", 
-      isHighlight: true // Tetap pakai highlight hijau stabilo
+      isHighlight: true 
     },
     { name: "Instagram", image: "/logososmed/ig.svg" },
     { name: "Shopee", image: "/logososmed/shopi.svg" },
     { name: "Gmail", image: "/logososmed/gmail.svg" },
   ];
 
-  // Gandakan array agar animasinya looping tanpa putus
   const duplicatedApps = [...apps, ...apps, ...apps];
   const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
-    <div className="w-full py-12 md:py-16 overflow-hidden relative bg-transparent">
+    <section className="w-full overflow-hidden py-12 md:py-16 relative bg-background">
       
       {/* JUDUL SECTION */}
       <div className="text-center mb-8 md:mb-10 px-4">
@@ -47,10 +44,9 @@ export default function IntegrationMarquee() {
         </h2>
       </div>
 
-      {/* Container Animasi Marquee (Full Width) */}
-      <div className="relative flex overflow-hidden z-0 w-full">
+      <div className="relative w-full overflow-hidden">
         
-        {/* Efek Fade transparan di ujung kiri & kanan - Responsif di HP & PC */}
+        {/* Efek Fade Transparan */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-16 sm:w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
 
@@ -64,7 +60,6 @@ export default function IntegrationMarquee() {
           }}
         >
           {duplicatedApps.map((app, index) => {
-            // Logika penentuan gambar (khusus Octabot yang punya 2 mode)
             let imgSrc = app.image || "";
             if (app.isHighlight) {
               imgSrc = mounted && currentTheme === "dark" ? app.imageDark! : app.imageLight!;
@@ -73,22 +68,23 @@ export default function IntegrationMarquee() {
             return (
               <div
                 key={index}
-                // Ukuran kotak dibikin bertahap: HP (w-16) -> Tablet (w-20) -> PC (w-24)
+                // FIX UI: SEMUA UKURAN KOTAK SEKARANG SAMA PERSIS! Tidak ada yang off-side / raksasa.
                 className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl border-2 transition-all duration-300
                   ${
                     app.isHighlight
-                      ? "bg-primary/10 border-primary shadow-[4px_4px_0_#3F6212] scale-110 mx-2"
-                      : "bg-card border-border shadow-[4px_4px_0_var(--color-border)] hover:border-primary/50 hover:-translate-y-1"
+                      // KOTAK OCTABOT: Ukuran sama, hanya bordernya hijau dan shadow permanen
+                      ? "bg-card border-primary shadow-[4px_4px_0_#3F6212] z-10"
+                      // KOTAK BIASA: Border abu-abu, baru muncul shadow hijau kalau disorot mouse
+                      : "bg-card border-border shadow-sm hover:border-primary hover:shadow-[4px_4px_0_#3F6212] hover:-translate-y-1"
                   }
                 `}
               >
-                {/* Tempat render gambar custom - Ukuran gambar juga responsif */}
                 <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 transition-transform duration-300 hover:scale-110">
                   <Image 
                     src={imgSrc} 
                     alt={app.name} 
                     fill 
-                    className="object-contain drop-shadow-sm"
+                    className="object-contain"
                     sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
                   />
                 </div>
@@ -98,6 +94,6 @@ export default function IntegrationMarquee() {
         </motion.div>
       </div>
       
-    </div>
+    </section>
   );
 }

@@ -7,7 +7,6 @@ export type Language = "id" | "en";
 
 export const DICTIONARY = {
   id: {
-    // PENYESUAIAN: cta dipecah menjadi ctaDesktop dan ctaMobile
     navbar: { items: ["Fitur", "Harga", "Kontak"], ctaDesktop: "Mulai Sekarang", ctaMobile: "Daftar", choose: "Pilih Bahasa" },
     hero: {
       titleStart: "Otomatisasikan",
@@ -38,6 +37,27 @@ export const DICTIONARY = {
         { title: "Integrasi Grup WhatsApp", desc: "Tambahkan bot ke dalam grup komunitas atau tim kerja untuk memantau aktivitas member." },
         { title: "Manajemen Grup Otomatis", desc: "Kick member yang melanggar aturan, sambut member baru, dan kelola admin secara otomatis." },
         { title: "Transaksi Dalam Grup", desc: "Member bisa membeli produk, top-up saldo, atau bayar tagihan langsung di dalam chat grup." }
+      ]
+    },
+    howItWorks: {
+      title: "Cara Kerja",
+      steps: [
+        { step: "STEP 1", title: "Upload dokumen", desc: "PDF, SOP, FAQ, katalog, dll." },
+        { step: "STEP 2", title: "Sistem mengindeks", desc: "Sistem mengindeks knowledge Anda secara otomatis." },
+        { step: "STEP 3", title: "Hubungkan WhatsApp", desc: "Hubungkan ke WhatsApp dengan scan QR Code." },
+        { step: "STEP 4", title: "AI Aktif", desc: "AI mulai menjawab pesan masuk otomatis." }
+      ]
+    },
+    // PENAMBAHAN: Section Integration (Bahasa Indonesia)
+    integration: {
+      badge: "100% TERKONEKSI",
+      titleStart: "Satu Octabot.",
+      titleEnd: "Semua Platform.",
+      desc: "Nggak perlu lagi pusing buka-tutup banyak aplikasi buat balas chat. Octabot nyambung langsung ke platform sosial media yang kamu pakai sehari-hari.",
+      points: [
+        "Balas DM & Komen dari satu layar",
+        "Tarik data realtime ke Google Sheets",
+        "Kirim notifikasi otomatis via API"
       ]
     },
     comparison: {
@@ -94,7 +114,6 @@ export const DICTIONARY = {
     }
   },
   en: {
-    // PENYESUAIAN: cta dipecah menjadi ctaDesktop dan ctaMobile untuk Bahasa Inggris
     navbar: { items: ["Features", "Pricing", "Contact"], ctaDesktop: "Start Now", ctaMobile: "Register", choose: "Select Language" },
     hero: {
       badge: "Beta Version", titleStart: "Automate Your", titleEnd: "Business.",
@@ -119,6 +138,27 @@ export const DICTIONARY = {
         { title: "WhatsApp Group Integration", desc: "Add the bot to community or team groups to monitor member activity." },
         { title: "Auto Group Management", desc: "Kick members who violate rules, welcome new members, and manage admins automatically." },
         { title: "In-Group Transactions", desc: "Members can buy products, top-up balances, or pay bills directly inside the group chat." }
+      ]
+    },
+    howItWorks: {
+      title: "How It Works",
+      steps: [
+        { step: "STEP 1", title: "Upload Documents", desc: "PDF, SOP, FAQ, catalogs, etc." },
+        { step: "STEP 2", title: "System Indexing", desc: "The system automatically indexes your knowledge base." },
+        { step: "STEP 3", title: "Connect WhatsApp", desc: "Connect your WhatsApp simply by scanning a QR Code." },
+        { step: "STEP 4", title: "AI is Active", desc: "The AI starts answering incoming messages automatically." }
+      ]
+    },
+    // PENAMBAHAN: Section Integration (English)
+    integration: {
+      badge: "100% CONNECTED",
+      titleStart: "One Octabot.",
+      titleEnd: "All Platforms.",
+      desc: "No more switching between multiple apps to reply to chats. Octabot connects directly to the social media platforms you use every day.",
+      points: [
+        "Reply to DMs & Comments from one screen",
+        "Pull real-time data to Google Sheets",
+        "Send automated notifications via API"
       ]
     },
     comparison: {

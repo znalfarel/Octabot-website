@@ -46,19 +46,23 @@ export default function FeaturesSection() {
             return (
               <div 
                 key={index} 
-                className="group relative bg-card/50 backdrop-blur-sm border border-border/50 p-8 rounded-2xl hover:border-primary/50 transition-all duration-300 flex flex-col items-start h-full"
+                className="group relative bg-card/50 backdrop-blur-sm border border-border/50 p-8 rounded-2xl hover:border-border transition-all duration-300 flex flex-col items-start h-full hover:-translate-y-1 hover:shadow-[0_8px_0_var(--color-border)]"
               >
-                {/* Hover Glow Effect (Tetap dipertahankan agar tetap keren) */}
+                {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
 
                 <div className="mb-6 relative">
-                  <div className="w-14 h-14 bg-background border border-border rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <Icon size={26} className="text-primary" strokeWidth={1.5} />
+                  {/* FIX TOTAL: Border paksa hijau (!border-primary) dan bayangan hijau tegas biar Octabot banget */}
+                  <div className="w-14 h-14 bg-background border-2 !border-primary rounded-xl flex items-center justify-center shadow-[4px_4px_0_#3F6212] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                    
+                    {/* FIX TOTAL WARNA IKON: Paksa Hitam (!text-black) di Terang, Paksa Hijau Stabilo (!text-primary) di Gelap */}
+                    <Icon size={26} className="!text-black dark:!text-primary" strokeWidth={2.5} />
+                    
                   </div>
-                  
                 </div>
 
-                <h3 className="font-heading text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+                {/* Hover Teks Judul */}
+                <h3 className="font-heading text-xl font-bold mb-3 text-foreground group-hover:!text-black dark:group-hover:!text-primary transition-colors">
                   {feature.title}
                 </h3>
                 

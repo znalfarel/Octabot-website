@@ -23,7 +23,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Octabot - Otomatisasi WhatsApp Modern",
+  title: "Octabot | Otomatisasikan Bisnismu",
   description: "Jasa penyewaan bot WA custom dengan fitur lengkap.",
   
   icons: {
